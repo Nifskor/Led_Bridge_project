@@ -1,2 +1,9 @@
 //test
-//ㅅㄷㄴㅅ
+void setup()
+{
+}
+
+void loop()
+{
+
+} //ㅅㄷㄴㅅ
