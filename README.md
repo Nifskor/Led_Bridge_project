@@ -31,7 +31,7 @@
 <div style="width:480;height:264;border:1px solid red; float:left,">
 <img src = "https://user-images.githubusercontent.com/92977647/151405882-868e048f-3da1-43c8-b910-628e1545a484.gif" width="480" height="264/"/>
 </div>
-<div style="width:480;height:264;border:1px solid red; float:left,">
+<div style="width:480;height:264;border:1px solid red; float:right,">
 <img width="480" alt="image" src="https://user-images.githubusercontent.com/92977647/151407074-f02b3c15-74e0-4a43-86bf-eca1ac3caa72.png">
 </div>
 ### 6. 완성후 예상 결과물 (예상도)
