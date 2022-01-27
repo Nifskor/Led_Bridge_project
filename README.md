@@ -1,7 +1,6 @@
 # <div align=center> Led_Bridge_project </div>
 #### <div align=center> 본 프로젝트는 개인 토이 프로젝트로 싱기버스에서 Led bridge Lamp 출력물 파츠를 이용해 <br>RGB LED Strip 을 이용하여 스탠드등을 만들어보는 프로젝트이다 </div></br>
 ***
-
 ### 제작 이유 
 > * 우리집에 있는 스탠드 등이 너무 오래되어서  사기엔 아깝고 나만의 스탠드 등을 만들어보기 위해서 
 
