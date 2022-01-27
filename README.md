@@ -32,5 +32,5 @@
 <img width="480" alt="image" src="https://user-images.githubusercontent.com/92977647/151407074-f02b3c15-74e0-4a43-86bf-eca1ac3caa72.png">
 
 ### 6. 완성후 예상 결과물 
-![image](https://user-images.githubusercontent.com/92977647/151407579-443d4673-a5aa-4c58-9bc1-738e3418344e.png)
-
+<img src = "https://user-images.githubusercontent.com/92977647/151407579-443d4673-a5aa-4c58-9bc1-738e3418344e.png" width="480" height="264">
+> * 출처 : https://www.thingiverse.com/thing:1639224
