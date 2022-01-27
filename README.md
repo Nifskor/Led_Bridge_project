@@ -28,12 +28,13 @@
 > * ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
 
 ### 5. 3D 프린터 출력 이미지 (제작 과정 진행중..) 
-<div style="width:480;height:264;border:1px solid red; float:left,">
-<img src = "https://user-images.githubusercontent.com/92977647/151405882-868e048f-3da1-43c8-b910-628e1545a484.gif" width="480" height="264/"/>
-</div>
-<div style="width:480;height:264;border:1px solid red; float:right,">
-<img width="480" alt="image" src="https://user-images.githubusercontent.com/92977647/151407074-f02b3c15-74e0-4a43-86bf-eca1ac3caa72.png">
-</div>
+<table>
+  <tr>
+<td> <img alt="" src = "https://user-images.githubusercontent.com/92977647/151405882-868e048f-3da1-43c8-b910-628e1545a484.gif" width="480" height="264/"/></td>
+
+<td> <img alt="" src="https://user-images.githubusercontent.com/92977647/151407074-f02b3c15-74e0-4a43-86bf-eca1ac3caa72.png" width="480"></td>
+    </table>
+
 ### 6. 완성후 예상 결과물 (예상도)
 <img src = "https://user-images.githubusercontent.com/92977647/151407579-443d4673-a5aa-4c58-9bc1-738e3418344e.png" width="480" height="264"/>
 출처 : https://www.thingiverse.com/thing:1639224
