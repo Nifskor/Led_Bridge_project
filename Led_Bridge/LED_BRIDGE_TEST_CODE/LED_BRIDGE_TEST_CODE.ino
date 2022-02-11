@@ -17,7 +17,7 @@ void setup() {
   strip.begin();
   strip.show();
   for(int i =0; i<=NUM_LEDS; i++){
-  strip.setPixelColor(i, 255,255,255);
+  strip.setPixelColor(i, 255,139,39); //2700k
 strip.show();
 strip.setBrightness(255);
   }
