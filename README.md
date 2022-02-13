@@ -32,7 +32,7 @@
 > * 11. LED반반 제어모드르 설정해야함 
 
 ### 4. 개발 언어 및 환경 
-> * ![Arduino](https://img.shields.io/badge/-Arduino-00979D?style=for-the-badge&logo=Arduino&logoColor=white)
+> * ![Arduino](https://img.shields.io/badge/-Arduino-00979D?style=for-the-badge&logo=Arduino&logoColor=white) - NANO
 > * ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
 
 ### 5. 3D 프린터 출력 이미지 (제작 과정 진행중..) 
