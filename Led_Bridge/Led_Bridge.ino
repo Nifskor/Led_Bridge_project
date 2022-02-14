@@ -1,6 +1,6 @@
 // Led Bridge Project ()
 /* 
-개발자 : INSU CHOI (Nifskor)
+개발자 : ING's - (Nifskor)
 
 개발 기간 : 2022 / 01 / 27 ~ 진행중 
 출력물 파트 출처 : https://www.thingiverse.com/thing:1639224
@@ -36,8 +36,6 @@ void setup() {
   for(int i =0; i<=NUM_LEDS; i++){
   //strip.setPixelColor(i, 255,139,39); //2700k
   strip.setPixelColor(i, 255,100,100); //2700k
-  //https://www.google.com/search?q=2700k++rgb&sxsrf=APq-WBspGEg4joCkWrXunQdkTakaw-iKaA:1644592012750&tbm=isch&source=iu&ictx=1&vet=1&fir=QnYxb3zusyq93M%252CTcttBnMs2MqKKM%252C_%253Bg8_9Bn4j1DnV0M%252CF7OrCUk0_fcJeM%252C_%253BvGLOjm7tu6-mrM%252CF7OrCUk0_fcJeM%252C_%253BR1RuhaJD_RF3gM%252CCQ31vUdaFsusIM%252C_%253BiddY8-ZO5vzQlM%252CCQ31vUdaFsusIM%252C_%253BYGqGJxvvL3XT1M%252CnarVLsOfoZQrjM%252C_%253BIPw7Ybmf9hJVEM%252CSvCYHPOJl-m3jM%252C_%253BRZdIQl8xeZ8qeM%252C5J7YHTGZT-5D9M%252C_%253BrGRDGWfS9yp-hM%252Ci5W1dO8liatZbM%252C_%253BbUKJAGzuV3Le3M%252CV5OHwtspmCuSUM%252C_&usg=AI4_-kTES-3Lb_b-bWYgwgKHaXBymwEDFw&sa=X&ved=2ahUKEwjhr-HV9vf1AhUNDt4KHfxLAPUQ9QF6BAgKEAE#imgrc=QnYxb3zusyq93Mhttps://www.google.com/search?q=2700k++rgb&sxsrf=APq-WBspGEg4joCkWrXunQdkTakaw-iKaA:1644592012750&tbm=isch&source=iu&ictx=1&vet=1&fir=QnYxb3zusyq93M%252CTcttBnMs2MqKKM%252C_%253Bg8_9Bn4j1DnV0M%252CF7OrCUk0_fcJeM%252C_%253BvGLOjm7tu6-mrM%252CF7OrCUk0_fcJeM%252C_%253BR1RuhaJD_RF3gM%252CCQ31vUdaFsusIM%252C_%253BiddY8-ZO5vzQlM%252CCQ31vUdaFsusIM%252C_%253BYGqGJxvvL3XT1M%252CnarVLsOfoZQrjM%252C_%253BIPw7Ybmf9hJVEM%252CSvCYHPOJl-m3jM%252C_%253BRZdIQl8xeZ8qeM%252C5J7YHTGZT-5D9M%252C_%253BrGRDGWfS9yp-hM%252Ci5W1dO8liatZbM%252C_%253BbUKJAGzuV3Le3M%252CV5OHwtspmCuSUM%252C_&usg=AI4_-kTES-3Lb_b-bWYgwgKHaXBymwEDFw&sa=X&ved=2ahUKEwjhr-HV9vf1AhUNDt4KHfxLAPUQ9QF6BAgKEAE#imgrc=QnYxb3zusyq93M
-  //color rgb
 strip.show();
 delay(50);
   }
@@ -58,27 +56,7 @@ void loop() {
    count=2;
     }
   }
-  /*while(count==0){
-  for(int j =0; j<=NUM_LEDS; j++){
-   strip.setPixelColor(j, 0,0,0); //2700k
-   strip.show();
-   delay(50);
-    count =2;
-  }*/
+
   }
   
   
-
-  // set pixel to red, delay(1000)
-  //for(int i =0; i<=NUM_LEDS; i++){
-  //strip.setPixelColor(i, 255, 255, 0);
-//strip.show();
-  
-  //strip.show();
-  //delay(1000);
-  // set pixel to off, delay(1000)
-  //  for(int j =0; j<=NUM_LEDS; j++){
-  //strip.setPixelColor(j, 0, 0, 0);
-  //  }
-  //strip.show();
-  //delay(1000);
