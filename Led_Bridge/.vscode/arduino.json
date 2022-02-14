@@ -1,0 +1,6 @@
+{
+    "port": "/dev/tty.usbserial-0001",
+    "configuration": "cpu=atmega328old",
+    "board": "arduino:avr:nano",
+    "sketch": "Led_Bridge.ino"
+}
