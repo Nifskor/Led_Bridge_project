@@ -30,12 +30,18 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, PIN, NEO_GRB + NEO_KHZ800)
 /*   아래 부분 수동변수 파트  */
 int count = 0;  // 현재 아직은 사용안함
 int resis = A0; // 가변저항
-int powerbutton = 2;
+int powerbutton = 2; // 파워용 버튼 
+int okbutton = 3; // 확인용 버튼 
+int okbuttontemp =0; //버튼 감지용 함
 int powercheck = 0;    // 전원껏다 켯다용
 int powerbutcheck = 0; // 파워 켜짐 여부 확인체크  1이면 꺼진상태 , 2이면 켜져있는 상태  , 5대기
 int displaycount =0; // 초기 디스플레이 표시 카운팅 체크 
 int select2 =0;
 int menustep = 0 ; // 메뉴 선택부분 
+int workingokcheck = 0;
+char *menuitem[] = {"REST MODE          ","STUDY MODE       " , "FIX MODE         " , "GREEN MODE        " ,
+  "BLUE MODE       ","Sleepin MODE         ","DJING MODE        ","MIDDLE MODE      "};
+  int menuNum = sizeof(menuitem)/sizeof(char *); //arraysize
 /*       ------  헤더 선언 부분 --------------------*/
 
 void setup()
@@ -73,6 +79,9 @@ void setup()
     delay(40);
   }
   pinMode(powerbutton, INPUT);
+  pinMode(okbutton,INPUT);
+  lcd.clear();
+  
 } // 셋업 부분 마지막
 
 /*  void loop 시작 부분 */
@@ -87,28 +96,30 @@ void loop()
 // end loop문
 /* 함수 처리 공간 */
 // 반복문 처리해서 탈출조건 만들어서 탈출하는형태로 구현 
-void bookmode()
+void restmode()
 {
   do { 
+    okbuttoncheck(); // 확인버튼 감지용 
    lcd.setCursor(0,0);
     lcd.println("REST MODE          ");
   ledbright(); // 밝기 제어 부분 
         for(int i = 0 ; i <=59; i++){
          strip.setPixelColor(i, 255,139,39); //2700k
-   // strip.setPixelColor(i, 255, 255, 255); // 2700k
-    strip.show();
-   // delay(40);
+        strip.show();
         }
-        }while(1); //버튼을 누른다던지 이벤트 발생시 
+        if(okbuttontemp==1){
+          workingokcheck++;
+          if(workingokcheck >=2) break;
+        }
+        
+        }while(true); //버튼을 누른다던지 이벤트 발생시 
+        workingokcheck =0;
 }
 
 void studymode()
 {
 }
 void fixmode()
-{
-}
-void redmode()
 {
 }
 void greenmode()
@@ -126,14 +137,22 @@ void djingmode()
 void middlemode(){
   
 }
+//------------------------------------------------------------------------------
+void okbuttoncheck(){/// 확인버튼 감지코드 
+  okbuttontemp = digitalRead(okbutton); // 파워버튼
+  Serial.println(okbuttontemp);
+}
+//-------------------------------------------------------------------------------
 void firstpage(){ // 시작후 초기 실행및 구현 화면 
    int select = analogRead(resis) / 128; // 나누기로 128해서 1 2 3 4~8 케이스 맞게나오게 설정
   Serial.println(select);
+  okbuttoncheck(); // 확인버튼 감지용 
    /* 메인 메뉴 셋팅 초기화면 구현 부 */ 
   if(powerbutcheck==!2){ //전원이 켜진 상태가 아닐때 
-     lcd.setCursor(0, 1); 
-     lcd.clear();
-    lcd.println("PLease POWER ON "); // 전원을 반드시 킨후 사용이 가능하도록 
+    lcd.setCursor(0, 0);
+    lcd.println("LED BRIDGE V2   ");
+    lcd.setCursor(0, 1); 
+    lcd.println("PLEASE POWER ON "); // 전원을 반드시 킨후 사용이 가능하도록 
     powera(); // 파워 전원 제어 부분 
   }else{
      powera(); // 파워 전원 제어 부분 
@@ -144,26 +163,55 @@ void firstpage(){ // 시작후 초기 실행및 구현 화면
  lcd.print("Please Select MODE");
  displaycount=1;
   }
-  char *menuitem[] = {"REST MODE          ","STUDY MODE       " , "FIX MODE         " , "GREEN MODE        " ,
-  "BLUE MODE       ","Sleepin MODE         ","DJING MODE        ","MIDDLE MODE      "};
-  int menuNum = sizeof(menuitem)/sizeof(char *); //arraysize
-
-if(menustep == 0 ){ 
-   lcd.begin(); 
-lcd.println(menuitem[select]);
+// -------------------------------메뉴 화면 부분 
+int firsttemp=0;
+//if(firsttemp==0)lcd.clear(); firsttemp=1;
+ lcd.setCursor(0, 0);
+ lcd.println("Select MODE :   ");
+ lcd.setCursor(0, 1);
+lcd.println(menuitem[select]); // 배열 부분 상단으로 올림 
+//---------------------------------- 초기 옵션 부분 
+ if (select ==0){
+  if(okbuttontemp ==1 ) {
+  restmode();
+  }
+}else if(select ==1){
+   if(okbuttontemp ==1 ) {
+  studymode();
+   }
 }
-if(select ==0){
-  menustep =0;
-  select =0;
-}else if (select ==1){
-  bookmode();
+else if( select ==2){
+   if(okbuttontemp ==1 ) {
+  fixmode();
+   }
+}else if(select ==3){
+   if(okbuttontemp ==1 ) {
+  greenmode();
+   }
+}else if(select ==4){
+   if(okbuttontemp ==1 ) {
+  bluemode();
+   }
+}else if(select ==5){
+   if(okbuttontemp ==1 ) {
+  sleeping();
+   }
+}else if(select ==6){
+   if(okbuttontemp ==1 ) {
+  djingmode();
+   }
+}else if(select ==7){
+   if(okbuttontemp ==1 ) {
+  middlemode();
+   }
 }
   }
 }
+//------------------------------------------------------------------------------
 void powera()
 {
   powercheck = digitalRead(powerbutton); // 파워버튼
-                                         //-------------------------------------------------------------------------------------
+ //-------------------------------------------------------------------------------------
   if (powercheck == 1)
   { // 버튼 눌린상태 눌린상태에서 전원꺼짐모
     if (powerbutcheck == 2)
@@ -216,6 +264,7 @@ void powera()
   }
   //-------------------------------------------------------------
 }
+//----------------------------------------------------------------
 void ledbright()
 {
   //lcd.begin();
@@ -352,11 +401,12 @@ void ledbright()
     strip.setBrightness(255);
     strip.show();
   }
-  Serial.println(val);
+  Serial.println(val);// 변할때만 작동하게 해야할듯 
     //lcd.clear();
     lcd.setCursor(0, 1);
     lcd.blink();
      lcd.print(val);
-     if(val  >=98&& val<100)lcd.clear();
+     if(val  >=98&& val<=102)lcd.clear();
+     if(val  >=0&& val<=0)lcd.clear(); // 0 이면 디스플레이 클리
    
 } // ledbright end
