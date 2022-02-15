@@ -79,62 +79,9 @@ void setup()
 void loop()
 {
   /* 선택 옵션 넣은후 작동되게 case문 작성 */
-  int select = analogRead(resis) / 128; // 나누기로 128해서 1 2 3 4~8 케이스 맞게나오게 설정
-  //powera(); // 파워 전원 제어 부분 
-  Serial.println(select);
-  while(displaycount==0){
-  lcd.begin();
- lcd.print("Please Select");
- displaycount=1;
-  }
-  char *menuitem[] = {"BACK MENU        ","REST MODE       " , "STUDY MODE         " , "FIX MODE        " ,
-  "GREEN MODE       ","BLUE MODE         ","Sleepin MODE        ","DJING MODE      "};
-  int menuNum = sizeof(menuitem)/sizeof(char *); //arraysize
-
-if(menustep == 0 ){ 
-   lcd.begin(); 
-lcd.println(menuitem[select]);
-}
-if(select ==0){
-  menustep =0;
-  select =0;
-}else if (select ==1){
-  bookmode();
-}
-  /*switch (select)
-  {
-     case '0':
-    menustep = 0; //초기화면 
-    break;
-  case '1':
-    bookmode();
-    Serial.println("case0");
-    break;
-  case '2':
-    studymode();
-    break;
-  case '3':
-    fixmode();
-    break;
-  case '4':
-    greenmode();
-    break;
-  case '5':
-    bluemode();
-    break;
-  case '6':
-    sleeping();
-    break;
-  case '7':
-    djingmode();
-    break;
-  }*/
-  // ledbright(); // 밝기 제어 부분 
-//for(int k =0; k<=59; k++){
-//strip.setPixelColor(k, 255,139,39); //2700k
-//ledbright();
-  }
+  firstpage();
  
+}
   /* -----------------------------*/
 
 // end loop문
@@ -176,8 +123,43 @@ void sleeping()
 void djingmode()
 {
 }
+void middlemode(){
+  
+}
+void firstpage(){ // 시작후 초기 실행및 구현 화면 
+   int select = analogRead(resis) / 128; // 나누기로 128해서 1 2 3 4~8 케이스 맞게나오게 설정
+  Serial.println(select);
+   /* 메인 메뉴 셋팅 초기화면 구현 부 */ 
+  if(powerbutcheck==!2){ //전원이 켜진 상태가 아닐때 
+     lcd.setCursor(0, 1); 
+     lcd.clear();
+    lcd.println("PLease POWER ON "); // 전원을 반드시 킨후 사용이 가능하도록 
+    powera(); // 파워 전원 제어 부분 
+  }else{
+     powera(); // 파워 전원 제어 부분 
+  while(displaycount==0){
+    lcd.setCursor(0, 0);
+    lcd.setCursor(0, 1);
+  lcd.clear();
+ lcd.print("Please Select MODE");
+ displaycount=1;
+  }
+  char *menuitem[] = {"REST MODE          ","STUDY MODE       " , "FIX MODE         " , "GREEN MODE        " ,
+  "BLUE MODE       ","Sleepin MODE         ","DJING MODE        ","MIDDLE MODE      "};
+  int menuNum = sizeof(menuitem)/sizeof(char *); //arraysize
 
-
+if(menustep == 0 ){ 
+   lcd.begin(); 
+lcd.println(menuitem[select]);
+}
+if(select ==0){
+  menustep =0;
+  select =0;
+}else if (select ==1){
+  bookmode();
+}
+  }
+}
 void powera()
 {
   powercheck = digitalRead(powerbutton); // 파워버튼
