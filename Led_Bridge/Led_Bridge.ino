@@ -39,7 +39,7 @@ int displaycount =0; // 초기 디스플레이 표시 카운팅 체크
 int select2 =0;
 int menustep = 0 ; // 메뉴 선택부분 
 int workingokcheck = 0;
-char *menuitem[] = {"REST MODE          ","STUDY MODE       " , "FIX MODE         " , "GREEN MODE        " ,
+char *menuitem[] = {"REST MODE(2300K)          ","STUDY MODE       " , "FIX MODE         " , "GREEN MODE        " ,
   "BLUE MODE       ","Sleepin MODE         ","DJING MODE        ","MIDDLE MODE      "};
   int menuNum = sizeof(menuitem)/sizeof(char *); //arraysize
 /*       ------  헤더 선언 부분 --------------------*/
@@ -68,7 +68,7 @@ void setup()
   for (int i = 0; i <= NUM_LEDS; i++)
   {
     // strip.setPixelColor(i, 255,139,39); //2700k
-    strip.setPixelColor(i, 255, 255, 255); // 2700k
+    strip.setPixelColor(i, 255,139,39);//2700k 
     strip.show();
     delay(40);
   }
@@ -96,17 +96,20 @@ void loop()
 // end loop문
 /* 함수 처리 공간 */
 // 반복문 처리해서 탈출조건 만들어서 탈출하는형태로 구현 
+// 아래에서 부턴 LED 조명 제어부분임 색상에따른 서칭이 필요 
 void restmode()
 {
   do { 
+   
     okbuttoncheck(); // 확인버튼 감지용 
    lcd.setCursor(0,0);
-    lcd.println("REST MODE          ");
+    lcd.println("REST MODE(2300K)          ");
   ledbright(); // 밝기 제어 부분 
         for(int i = 0 ; i <=59; i++){
-         strip.setPixelColor(i, 255,139,39); //2700k
+         strip.setPixelColor(i, 255,115,23); //2300k 색상 
+         //strip.setPixelColor(i, 255,139,39);//2700k 색상 
         strip.show();
-        }
+        } 
         if(okbuttontemp==1){
           workingokcheck++;
           if(workingokcheck >=2) break;
@@ -118,24 +121,252 @@ void restmode()
 
 void studymode()
 {
+   do { 
+    //---------------------------------
+    okbuttoncheck(); // 확인버튼 감지용 
+    int val = analogRead(resis) / 256; // 나누기 256로 max값 4로 나오게 4 가지 옵션 
+    //-------------------------------------
+   lcd.setCursor(0,0);
+    lcd.println("STUDY MODE          ");
+  //ledbright(); // 밝기 제어 부분 
+       lcd.setCursor(0,1);
+       lcd.println("Choose OPtion");
+       //---------------------------------------- 아래 부터 스터디 모드 아래 모드 시작 default 1번모드임 
+       if(val == 0) {
+        lcd.setCursor(0,1);
+       lcd.println("Language mode .    ");
+       //-------------------------------------------여기서 부터 언어용 불빛 
+       if(okbuttontemp==1){
+        do { 
+    okbuttoncheck(); // 확인버튼 감지용 
+   lcd.setCursor(0,0);
+    lcd.println("Language mode         ");
+  ledbright(); // 밝기 제어 부분 
+        for(int i = 0 ; i <=59; i++){
+         strip.setPixelColor(i, 255,219,186); //4500k
+        strip.show();
+        }
+        if(okbuttontemp==1){
+          workingokcheck++;
+          if(workingokcheck >=2) break;
+        }
+        
+        }while(true); //버튼을 누른다던지 이벤트 발생시 
+        workingokcheck =0; 
+       }// if oktemp 끝 
+       }// if val 끝 
+       //------------------------------------------- 끝 아래는 수학모드 
+       if (val ==1) {
+        lcd.setCursor(0,1);
+       lcd.println("Math SC MODE .    ");
+        if(okbuttontemp==1){
+        do { 
+    okbuttoncheck(); // 확인버튼 감지용 
+   lcd.setCursor(0,0);
+    lcd.println("Math SC MODE         ");
+  ledbright(); // 밝기 제어 부분 
+        for(int i = 0 ; i <=59; i++){
+         strip.setPixelColor(i, 255,243,239); //6000k
+        strip.show();
+        }
+        if(okbuttontemp==1){
+          workingokcheck++;
+          if(workingokcheck >=2) break;
+        }
+        
+        }while(true); //버튼을 누른다던지 이벤트 발생시 
+        workingokcheck =0; 
+       }// if oktemp 끝  
+       } 
+       //--------------------------------------------- 아래 음악 모드 
+       if(val == 2) {
+        lcd.setCursor(0,1);
+       lcd.println("MUSIC MODE .      ");
+        if(okbuttontemp==1){
+        do { 
+    okbuttoncheck(); // 확인버튼 감지용 
+   lcd.setCursor(0,0);
+    lcd.println("MUSIC MODE         ");
+  ledbright(); // 밝기 제어 부분 
+        for(int i = 0 ; i <=59; i++){
+         strip.setPixelColor(i, 255,180,107); //3000k
+        strip.show();
+        }
+        if(okbuttontemp==1){
+          workingokcheck++;
+          if(workingokcheck >=2) break;
+        }
+        
+        }while(true); //버튼을 누른다던지 이벤트 발생시 
+        workingokcheck =0; 
+       }// if oktemp 끝   
+       }
+       //-------------------------------------------- 아래 탈출 모드 
+        if (val ==3 ) {
+        lcd.setCursor(0,1);
+       lcd.println("EXIT               ");
+       }
+        if(okbuttontemp==1){
+          workingokcheck++;
+          if(workingokcheck >=2) break;
+        }
+        }while(true); //버튼을 누른다던지 이벤트 발생시 
+        workingokcheck =0; 
 }
 void fixmode()
-{
+{do { 
+  
+    okbuttoncheck(); // 확인버튼 감지용 
+   lcd.setCursor(0,0);
+    lcd.println("FIX  MODE          ");
+  ledbright(); // 밝기 제어 부분 
+        for(int i = 0 ; i <=59; i++){
+       strip.setPixelColor(i, 255,249,253); //6500k
+        strip.show();
+        }
+        if(okbuttontemp==1){
+          workingokcheck++;
+          if(workingokcheck >=2) break;
+        }
+        
+        }while(true); //버튼을 누른다던지 이벤트 발생시 
+        workingokcheck =0; 
+ 
 }
 void greenmode()
-{
+{ 
+  do { 
+  
+    okbuttoncheck(); // 확인버튼 감지용 
+   lcd.setCursor(0,0);
+    lcd.println("GREEN MODE          ");
+  ledbright(); // 밝기 제어 부분 
+        for(int i = 0 ; i <=59; i++){
+         strip.setPixelColor(i, 0,255,0); //2700k
+        strip.show();
+        }
+        if(okbuttontemp==1){
+          workingokcheck++;
+          if(workingokcheck >=2) break;
+        }
+        
+        }while(true); //버튼을 누른다던지 이벤트 발생시 
+        workingokcheck =0; 
 }
 void bluemode()
 {
+  do { 
+   
+    okbuttoncheck(); // 확인버튼 감지용 
+   lcd.setCursor(0,0);
+    lcd.println("BLUE MODE          ");
+  ledbright(); // 밝기 제어 부분 
+        for(int i = 0 ; i <=59; i++){
+         strip.setPixelColor(i, 0,0,255); //2700k
+        strip.show();
+        }
+        if(okbuttontemp==1){
+          workingokcheck++;
+          if(workingokcheck >=2) break;
+        }
+        
+        }while(true); //버튼을 누른다던지 이벤트 발생시 
+        workingokcheck =0; 
 }
 void sleeping()
 {
+  
 }
-void djingmode()
+void djingmode()// 디제잉 모드 
 {
+  do { 
+   
+    okbuttoncheck(); // 확인버튼 감지용 
+   lcd.setCursor(0,0);
+    lcd.println("DJING MODE          ");
+  lcd.setCursor(0,0);
+  lcd.println("AllloopEnd->OUT.");
+  //colorWipe(strip.Color(255,   0,   0), 50); // Red
+  //colorWipe(strip.Color(  0, 255,   0), 50); // Green
+  //colorWipe(strip.Color(  0,   0, 255), 50); // Blue
+
+  // Do a theater marquee effect in various colors...
+ // theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
+  //theaterChase(strip.Color(127,   0,   0), 50); // Red, half brightness
+  //theaterChase(strip.Color(  0,   0, 127), 5); // Blue, half brightness
+
+  //rainbow(8);             // Flowing rainbow cycle along the whole strip
+  theaterChaseRainbow(50); // Rainbow-enhanced theaterChase variant
+        if(okbuttontemp==1){
+          workingokcheck++;
+          if(workingokcheck >=2) break;
+        }
+        
+        }while(true); //버튼을 누른다던지 이벤트 발생시 
+        workingokcheck =0; 
+  
 }
 void middlemode(){
   
+}
+//--------------------------------------------------------------------- djing mode 함수 
+void colorWipe(uint32_t color, int wait) {
+  for(int i=0; i<strip.numPixels(); i++) { // For each pixel in strip...
+    strip.setPixelColor(i, color);         //  Set pixel's color (in RAM)
+    strip.show();                          //  Update strip to match
+    delay(wait);                           //  Pause for a moment
+  }
+}
+void theaterChase(uint32_t color, int wait) {
+  for(int a=0; a<20; a++) {  // Repeat 10 times...
+    for(int b=0; b<3; b++) { //  'b' counts from 0 to 2...
+      strip.clear();         //   Set all pixels in RAM to 0 (off)
+      // 'c' counts up from 'b' to end of strip in steps of 3...
+      for(int c=b; c<strip.numPixels(); c += 3) {
+        strip.setPixelColor(c, color); // Set pixel 'c' to value 'color'
+      }
+      strip.show(); // Update strip with new contents
+      delay(wait);  // Pause for a moment
+    }
+  }
+}
+void rainbow(int wait) {
+  // Hue of first pixel runs 5 complete loops through the color wheel.
+  // Color wheel has a range of 65536 but it's OK if we roll over, so
+  // just count from 0 to 5*65536. Adding 256 to firstPixelHue each time
+  // means we'll make 5*65536/256 = 1280 passes through this loop:
+  for(long firstPixelHue = 0; firstPixelHue < 5*65536; firstPixelHue += 256) {
+    // strip.rainbow() can take a single argument (first pixel hue) or
+    // optionally a few extras: number of rainbow repetitions (default 1),
+    // saturation and value (brightness) (both 0-255, similar to the
+    // ColorHSV() function, default 255), and a true/false flag for whether
+    // to apply gamma correction to provide 'truer' colors (default true).
+    strip.rainbow(firstPixelHue);
+    // Above line is equivalent to:
+    // strip.rainbow(firstPixelHue, 1, 255, 255, true);
+    strip.show(); // Update strip with new contents
+    delay(wait);  // Pause for a moment
+  }
+}
+void theaterChaseRainbow(int wait) {
+  int firstPixelHue = 0;     // First pixel starts at red (hue 0)
+  for(int a=0; a<30; a++) {  // Repeat 30 times...
+    for(int b=0; b<3; b++) { //  'b' counts from 0 to 2...
+      strip.clear();         //   Set all pixels in RAM to 0 (off)
+      // 'c' counts up from 'b' to end of strip in increments of 3...
+      for(int c=b; c<strip.numPixels(); c += 3) {
+        // hue of pixel 'c' is offset by an amount to make one full
+        // revolution of the color wheel (range 65536) along the length
+        // of the strip (strip.numPixels() steps):
+        int      hue   = firstPixelHue + c * 65536L / strip.numPixels();
+        uint32_t color = strip.gamma32(strip.ColorHSV(hue)); // hue -> RGB
+        strip.setPixelColor(c, color); // Set pixel 'c' to value 'color'
+      }
+      strip.show();                // Update strip with new contents
+      delay(wait);                 // Pause for a moment
+      firstPixelHue += 65536 / 90; // One cycle of color wheel over 90 frames
+    }
+  }
 }
 //------------------------------------------------------------------------------
 void okbuttoncheck(){/// 확인버튼 감지코드 
@@ -253,7 +484,7 @@ void powera()
     for (int i = 0; i <= NUM_LEDS; i++)
     {
        strip.setBrightness(70);
-      strip.setPixelColor(i, 255, 255, 255);
+      strip.setPixelColor(i, 255,139,39);//2700k 색상 
       strip.show();
       delay(40);
       powerbutcheck = 2; // 켜진후 꺼짐을 대기하는 함수
