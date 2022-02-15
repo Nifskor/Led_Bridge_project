@@ -284,19 +284,24 @@ void djingmode()// 디제잉 모드
     okbuttoncheck(); // 확인버튼 감지용 
    lcd.setCursor(0,0);
     lcd.println("DJING MODE          ");
-  lcd.setCursor(0,0);
+  lcd.setCursor(0,1);
   lcd.println("AllloopEnd->OUT.");
+  djingstart();
   //colorWipe(strip.Color(255,   0,   0), 50); // Red
   //colorWipe(strip.Color(  0, 255,   0), 50); // Green
-  //colorWipe(strip.Color(  0,   0, 255), 50); // Blue
-
-  // Do a theater marquee effect in various colors...
- // theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
-  //theaterChase(strip.Color(127,   0,   0), 50); // Red, half brightness
-  //theaterChase(strip.Color(  0,   0, 127), 5); // Blue, half brightness
-
+  colorWipe(strip.Color(  0,   0, 0), 50); // Dark
+delay(1000);
+  // This is middle parts 
+  theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
+  theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
+  theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
+  theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
+  theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
+  theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
+  theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
+  colorWipe(strip.Color(  0,   0, 0), 50); // Dark
   //rainbow(8);             // Flowing rainbow cycle along the whole strip
-  theaterChaseRainbow(50); // Rainbow-enhanced theaterChase variant
+  //theaterChaseRainbow(50); // Rainbow-enhanced theaterChase variant
         if(okbuttontemp==1){
           workingokcheck++;
           if(workingokcheck >=2) break;
@@ -310,6 +315,17 @@ void middlemode(){
   
 }
 //--------------------------------------------------------------------- djing mode 함수 
+void djingstart(){
+  for(int i=0; i<strip.numPixels(); i++){
+   strip.setPixelColor(i, 255,255,255); //2700k         //  Set pixel's color (in RAM)
+    strip.show();     }                     //  Update strip to match
+    delay(10000);     
+             for(int j=0; j<strip.numPixels(); j++){
+   strip.setPixelColor(j, 255,255,255); //2700k         //  Set pixel's color (in RAM)
+    strip.show();     }                     //  Update strip to match
+    delay(1000);          
+  
+}
 void colorWipe(uint32_t color, int wait) {
   for(int i=0; i<strip.numPixels(); i++) { // For each pixel in strip...
     strip.setPixelColor(i, color);         //  Set pixel's color (in RAM)
@@ -318,7 +334,7 @@ void colorWipe(uint32_t color, int wait) {
   }
 }
 void theaterChase(uint32_t color, int wait) {
-  for(int a=0; a<20; a++) {  // Repeat 10 times...
+  for(int a=0; a<10; a++) {  // Repeat 10 times...
     for(int b=0; b<3; b++) { //  'b' counts from 0 to 2...
       strip.clear();         //   Set all pixels in RAM to 0 (off)
       // 'c' counts up from 'b' to end of strip in steps of 3...
