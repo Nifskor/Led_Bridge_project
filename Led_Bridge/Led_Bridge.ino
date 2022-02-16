@@ -290,7 +290,7 @@ void djingmode()// 디제잉 모드
   //colorWipe(strip.Color(255,   0,   0), 50); // Red
   //colorWipe(strip.Color(  0, 255,   0), 50); // Green
   colorWipe(strip.Color(  0,   0, 0), 50); // Dark
-delay(1000);
+delay(10000);
   // This is middle parts 
   theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
   theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
