@@ -100,7 +100,6 @@ void loop()
 void restmode()
 {
   do { 
-   
     okbuttoncheck(); // 확인버튼 감지용 
    lcd.setCursor(0,0);
     lcd.println("REST MODE(2300K)          ");
@@ -275,7 +274,23 @@ void bluemode()
 }
 void sleeping()
 {
-  
+  do { 
+    okbuttoncheck(); // 확인버튼 감지용 
+   lcd.setCursor(0,0);
+    lcd.println("REST MODE(2300K)          ");
+  ledbright(); // 밝기 제어 부분 
+        for(int i = 0 ; i <=59; i++){
+         strip.setPixelColor(i, 255,115,23); //2300k 색상 
+         //strip.setPixelColor(i, 255,139,39);//2700k 색상 
+        strip.show();
+        } 
+        if(okbuttontemp==1){
+          workingokcheck++;
+          if(workingokcheck >=2) break;
+        }
+        
+        }while(true); //버튼을 누른다던지 이벤트 발생시 
+        workingokcheck =0; 
 }
 void djingmode()// 디제잉 모드 
 {
