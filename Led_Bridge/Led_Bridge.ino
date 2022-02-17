@@ -123,6 +123,7 @@ void restmode()
         
         }while(true); //버튼을 누른다던지 이벤트 발생시 
         workingokcheck =0;
+        timer0_millis=0; //외부 전역 변수 초기화 시간카운트위
 }
 
 void studymode()
@@ -218,9 +219,12 @@ void studymode()
         }
         }while(true); //버튼을 누른다던지 이벤트 발생시 
         workingokcheck =0; 
+        timer0_millis=0; //외부 전역 변수 초기화 시간카운트위
 }
 void fixmode()
-{do { 
+{
+  lcd.clear();
+  do { 
   
     okbuttoncheck(); // 확인버튼 감지용 
    lcd.setCursor(0,0);
@@ -237,10 +241,11 @@ void fixmode()
         
         }while(true); //버튼을 누른다던지 이벤트 발생시 
         workingokcheck =0; 
- 
+ timer0_millis=0; //외부 전역 변수 초기화 시간카운트위
 }
 void greenmode()
 { 
+  lcd.clear();
   do { 
   
     okbuttoncheck(); // 확인버튼 감지용 
@@ -258,9 +263,11 @@ void greenmode()
         
         }while(true); //버튼을 누른다던지 이벤트 발생시 
         workingokcheck =0; 
+        timer0_millis=0; //외부 전역 변수 초기화 시간카운트위
 }
 void bluemode()
 {
+  lcd.clear();
   do { 
    
     okbuttoncheck(); // 확인버튼 감지용 
@@ -278,26 +285,49 @@ void bluemode()
         
         }while(true); //버튼을 누른다던지 이벤트 발생시 
         workingokcheck =0; 
+        timer0_millis=0; //외부 전역 변수 초기화 시간카운트위
 }
 void sleeping() // 60분이 지나면 자동으로 led가 종료되게 설정 
 {
   timer0_millis=0; //외부 전역 변수 초기화 시간카운트위
   lcd.clear();
+  lcd.println("please wait...              ");
+  for(int m = 0 ; m <=59; m++){
+         strip.setPixelColor(m, 0,0,0); //2300k 색상 
+         //strip.setPixelColor(i, 255,139,39);//2700k 색상 
+        strip.show();
+        delay(30);
+        } 
   do { 
     millisTime = millis();
-    int timev4 = (millisTime/58000)%10;//6초가 6000 -> 10초 10000 -> 1분 60000 (60초 -> 분)
-    lcd.setCursor(0,1);
-    lcd.println((String)timev4+" MIN LEFT                  ");
-   // lcd.noBacklight(); // 화면끄기 
+    int timev4 = (millisTime/55000);//6초가 6000 -> 10초 10000 -> 1분 60000 (60초 -> 분) 시간 오차 발생 (7초정도)
+    //------------------------------------------------시간 감지 카운팅용 
+    lcd.setCursor(0,0);
+    lcd.println((String)timev4+"  :MIN LEFT 60M                  ");
     okbuttoncheck(); // 확인버튼 감지용 
-   lcd.setCursor(0,0);
-    lcd.println("Sleeping MODE         ");
-  //ledbright(); // 밝기 제어 부분 
-        for(int i = 0 ; i <=59; i++){
+   lcd.setCursor(0,1);
+    lcd.println("    Blight/Sleep        ");
+  ledbright(); // 밝기 제어 부분 
+        for(int i = 29 ; i <=59; i++){
          strip.setPixelColor(i, 255,115,23); //2300k 색상 
          //strip.setPixelColor(i, 255,139,39);//2700k 색상 
         strip.show();
         } 
+        //-------------------------------------------시간 제어 
+        if(timev4 == 4){
+          lcd.noBacklight(); // 4분 경과후 lcd 끔 
+        }else if(timev4 ==56){
+          lcd.backlight(); //종료 4분전에 다시 화면을 킴 
+        }
+        if(timev4 ==60){//60분후 자동으로 꺼짐 
+          for(int k = 0 ; k <=59; k++){
+         strip.setPixelColor(k, 0,0,0); //2300k 색상 
+         //strip.setPixelColor(i, 255,139,39);//2700k 색상 
+        strip.show();
+        delay(30);
+        }
+         break;  
+        }
         if(okbuttontemp==1){
           workingokcheck++;
           if(workingokcheck >=2) break;
@@ -305,7 +335,7 @@ void sleeping() // 60분이 지나면 자동으로 led가 종료되게 설정
         
         }while(true); //버튼을 누른다던지 이벤트 발생시 
         workingokcheck =0;
-        
+        timer0_millis=0; //외부 전역 변수 초기화 시간카운트위
 }
 void djingmode()// 디제잉 모드 
 {
@@ -339,7 +369,7 @@ delay(10000);
         
         }while(true); //버튼을 누른다던지 이벤트 발생시 
         workingokcheck =0; 
-  
+  timer0_millis=0; //외부 전역 변수 초기화 시간카운트위
 }
 void middlemode(){
   
@@ -421,6 +451,8 @@ void okbuttoncheck(){/// 확인버튼 감지코드
 }
 //-------------------------------------------------------------------------------
 void firstpage(){ // 시작후 초기 실행및 구현 화면 
+  millisTime = millis();
+  int timev4 = (millisTime/55000);//6초가 6000 -> 10초 10000 -> 1분 60000 (60초 -> 분) 시간 오차 발생 (7초정도)
    int select = analogRead(resis) / 128; // 나누기로 128해서 1 2 3 4~8 케이스 맞게나오게 설정
   Serial.println(select);
   okbuttoncheck(); // 확인버튼 감지용 
@@ -428,17 +460,15 @@ void firstpage(){ // 시작후 초기 실행및 구현 화면
   if(powerbutcheck==!2){ //전원이 켜진 상태가 아닐때 
     //MsTimer2::start(); // 화면 종료 타이머 시작 
     lcd.setCursor(0, 0);
-     millisTime=millis(); // 타이머 카운팅 시작 
-   int timev4 = (millisTime/10000)%10;//1000의 자리  
     lcd.println("HI ING's LED BRD");
     lcd.setCursor(0, 1); 
     lcd.println("PLEASE POWER ON "); // 전원을 반드시 킨후 사용이 가능하도록 
     powera(); // 파워 전원 제어 부분 
-    if(select <=2) {
+   /* if(select <=2) {
       lcd.noBacklight();
     }else if (select >=3 && select<=8){
       lcd.backlight();
-    }
+    }*/
   }else{
      powera(); // 파워 전원 제어 부분 
   while(displaycount==0){
@@ -449,6 +479,11 @@ void firstpage(){ // 시작후 초기 실행및 구현 화면
  displaycount=1;
   }
 // -------------------------------메뉴 화면 부분 
+if(timev4 ==1){//5분 경과후 자동으로 화면꺼짐 
+    lcd.noBacklight();
+  }if (select >=4){ // 로타리 5이상일경우 화면 켜짐 
+    lcd.backlight();
+  }
 int firsttemp=0;
 //if(firsttemp==0)lcd.clear(); firsttemp=1;
  lcd.setCursor(0, 0);
@@ -502,6 +537,7 @@ void powera()
     if (powerbutcheck == 2)
     { // 전원이 켜져있는 상태라면? 꺼야겠지
        lcd.begin(); 
+       lcd.backlight();
         lcd.print("POWER OFF");
         lcd.setCursor(0, 1);
         lcd.print("STAND POWER OFF");
@@ -545,7 +581,7 @@ void powera()
       powerbutcheck = 2; // 켜진후 꺼짐을 대기하는 함수
      
     }
-     
+     timer0_millis=0; //외부 전역 변수 초기화 시간카운트위
     Serial.println("전원이 켜짐");
   }
   //-------------------------------------------------------------
