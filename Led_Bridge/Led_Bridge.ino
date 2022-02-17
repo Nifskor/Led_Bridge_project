@@ -96,16 +96,13 @@ void loop()
  
 }
   /* -----------------------------*/
-  //시간 경과후 자동으로 화면 꺼지게 하기위한 함수 
-void timerIS(){// 가변저항 수치 이하면 작동하게 
-
-}
 // end loop문
 /* 함수 처리 공간 */
 // 반복문 처리해서 탈출조건 만들어서 탈출하는형태로 구현 
 // 아래에서 부턴 LED 조명 제어부분임 색상에따른 서칭이 필요 
 void restmode()
 {
+  lcd.clear();
   do { 
     okbuttoncheck(); // 확인버튼 감지용 
    lcd.setCursor(0,0);
@@ -128,6 +125,7 @@ void restmode()
 
 void studymode()
 {
+  lcd.clear();
    do { 
     //---------------------------------
     okbuttoncheck(); // 확인버튼 감지용 
@@ -269,7 +267,6 @@ void bluemode()
 {
   lcd.clear();
   do { 
-   
     okbuttoncheck(); // 확인버튼 감지용 
    lcd.setCursor(0,0);
     lcd.println("BLUE MODE          ");
@@ -308,7 +305,7 @@ void sleeping() // 60분이 지나면 자동으로 led가 종료되게 설정
    lcd.setCursor(0,1);
     lcd.println("    Blight/Sleep        ");
   ledbright(); // 밝기 제어 부분 
-        for(int i = 29 ; i <=59; i++){
+        for(int i = 25 ; i <=59; i++){
          strip.setPixelColor(i, 255,115,23); //2300k 색상 
          //strip.setPixelColor(i, 255,139,39);//2700k 색상 
         strip.show();
@@ -339,6 +336,7 @@ void sleeping() // 60분이 지나면 자동으로 led가 종료되게 설정
 }
 void djingmode()// 디제잉 모드 
 {
+  lcd.clear();
   do { 
    
     okbuttoncheck(); // 확인버튼 감지용 
@@ -372,7 +370,114 @@ delay(10000);
   timer0_millis=0; //외부 전역 변수 초기화 시간카운트위
 }
 void middlemode(){
-  
+  lcd.clear();
+  for(int k = 0 ; k <=59; k++){
+         strip.setPixelColor(k, 0,0,0); //red mode
+        strip.show();
+        }
+  do { 
+    //---------------------------------
+    okbuttoncheck(); // 확인버튼 감지용 
+    int val = analogRead(resis) / 256; // 나누기 256로 max값 4로 나오게 4 가지 옵션 
+    //-------------------------------------
+   lcd.setCursor(0,0);
+    lcd.println("middle MODE          ");
+  //ledbright(); // 밝기 제어 부분 
+       lcd.setCursor(0,1);
+       lcd.println("Choose OPtion");
+       //---------------------------------------- 아래 부터 스터디 모드 아래 모드 시작 default 1번모드임 
+       if(val == 0) {
+        lcd.setCursor(0,1);
+       lcd.println("3000k left mode .    ");
+       //-------------------------------------------여기서 3000k left
+       if(okbuttontemp==1){
+        lcd.clear();
+        do { 
+    okbuttoncheck(); // 확인버튼 감지용 
+   lcd.setCursor(0,0);
+    lcd.println("3000k left mode         ");
+  ledbright(); // 밝기 제어 부분 
+        for(int i = 0 ; i <=29; i++){
+         strip.setPixelColor(i, 255,180,107); //3000k
+        strip.show();
+        }
+        if(okbuttontemp==1){
+          workingokcheck++;
+          if(workingokcheck >=2) break;
+        }
+        
+        }while(true); //버튼을 누른다던지 이벤트 발생시 
+        workingokcheck =0; 
+       }// if oktemp 끝 
+       }// if val 끝 
+       //------------------------------------------- 끝 아래는 3000k right
+       if (val ==1) {
+        lcd.setCursor(0,1);
+       lcd.println("3000k right MODE .    ");
+        if(okbuttontemp==1){
+          for(int k = 0 ; k <=59; k++){
+         strip.setPixelColor(k, 0,0,0); //red mode
+        strip.show();
+        }
+        lcd.clear();
+        do { 
+    okbuttoncheck(); // 확인버튼 감지용 
+   lcd.setCursor(0,0);
+    lcd.println("3000k right MODE         ");
+  ledbright(); // 밝기 제어 부분 
+        for(int i = 30 ; i <=59; i++){
+         strip.setPixelColor(i, 255,180,107); //3000k
+        strip.show();
+        }
+        if(okbuttontemp==1){
+          workingokcheck++;
+          if(workingokcheck >=2) break;
+        }
+        
+        }while(true); //버튼을 누른다던지 이벤트 발생시 
+        workingokcheck =0; 
+       }// if oktemp 끝  
+       } 
+       //--------------------------------------------- 아래 RED middle  
+       if(val == 2) {
+        lcd.setCursor(0,1);
+       lcd.println("RED   MODE .      ");
+        if(okbuttontemp==1){
+          for(int k = 0 ; k <=59; k++){
+         strip.setPixelColor(k, 0,0,0); //red mode
+        strip.show();
+        }
+        lcd.clear();
+        do { 
+    okbuttoncheck(); // 확인버튼 감지용 
+   lcd.setCursor(0,0);
+    lcd.println("RED    MODE         ");
+  ledbright(); // 밝기 제어 부분 
+        for(int i = 26 ; i <=59; i++){
+         strip.setPixelColor(i, 255,0,0); //red mode
+        strip.show();
+        }
+        if(okbuttontemp==1){
+          workingokcheck++;
+          if(workingokcheck >=2) break;
+        }
+        
+        }while(true); //버튼을 누른다던지 이벤트 발생시 
+        workingokcheck =0; 
+       }// if oktemp 끝   
+       }
+       //-------------------------------------------- 아래 탈출 모드 
+        if (val ==3 ) {
+        lcd.setCursor(0,1);
+       lcd.println("EXIT               ");
+       }
+        if(okbuttontemp==1){
+          workingokcheck++;
+          if(workingokcheck >=2) break;
+        }
+        }while(true); //버튼을 누른다던지 이벤트 발생시 
+        workingokcheck =0; 
+        timer0_millis=0; //외부 전역 변수 초기화 시간카운트위
 }
 //--------------------------------------------------------------------- djing mode 함수 
 void djingstart(){
@@ -464,11 +569,13 @@ void firstpage(){ // 시작후 초기 실행및 구현 화면
     lcd.setCursor(0, 1); 
     lcd.println("PLEASE POWER ON "); // 전원을 반드시 킨후 사용이 가능하도록 
     powera(); // 파워 전원 제어 부분 
-   /* if(select <=2) {
+    //------------------------------화면 밝기 
+    if(select<=2 ){
       lcd.noBacklight();
-    }else if (select >=3 && select<=8){
+    }else if(select >=3 && select<=8){
       lcd.backlight();
-    }*/
+    }
+    //------------------------------- 화면 밝기 
   }else{
      powera(); // 파워 전원 제어 부분 
   while(displaycount==0){
@@ -481,9 +588,10 @@ void firstpage(){ // 시작후 초기 실행및 구현 화면
 // -------------------------------메뉴 화면 부분 
 if(timev4 ==1){//5분 경과후 자동으로 화면꺼짐 
     lcd.noBacklight();
-  }if (select >=4){ // 로타리 5이상일경우 화면 켜짐 
+  }if (select >=4){ // 로타리 4이상일경우 화면 켜짐 
     lcd.backlight();
   }
+  //------------------------------------------
 int firsttemp=0;
 //if(firsttemp==0)lcd.clear(); firsttemp=1;
  lcd.setCursor(0, 0);
