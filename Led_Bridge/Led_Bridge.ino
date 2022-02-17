@@ -19,6 +19,7 @@ RGB LED Strip 을 이용하여 스탠드 등을 만들어 보는 프로젝트 �
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 #include <Adafruit_NeoPixel.h>
+#include <MsTimer2.h> // 타이머 인터럽트 발생 함수 
 #ifdef __AVR__
 #include <avr/power.h>
 #endif
@@ -39,6 +40,9 @@ int displaycount =0; // 초기 디스플레이 표시 카운팅 체크
 int select2 =0;
 int menustep = 0 ; // 메뉴 선택부분 
 int workingokcheck = 0;
+unsigned long millisTime; // 전체 총 카운팅 업시간 
+extern volatile unsigned long timer0_millis ; // 타이머 변수 
+unsigned long timecount; // 현재 시간 카운팅  
 char *menuitem[] = {"REST MODE(2300K)          ","STUDY MODE       " , "FIX MODE         " , "GREEN MODE        " ,
   "BLUE MODE       ","Sleepin MODE         ","DJING MODE        ","MIDDLE MODE      "};
   int menuNum = sizeof(menuitem)/sizeof(char *); //arraysize
@@ -57,7 +61,7 @@ void setup()
   lcd.print("WELCOME, LED BRI");
  lcd.setCursor(0, 1);
  lcd.print("DGE V2 ING's");
- //--------------------------------------------- display
+ //--------------------------------------------- display 
   strip.begin();
   strip.show();
   strip.setBrightness(255); //초기밝기255
@@ -81,7 +85,6 @@ void setup()
   pinMode(powerbutton, INPUT);
   pinMode(okbutton,INPUT);
   lcd.clear();
-  
 } // 셋업 부분 마지막
 
 /*  void loop 시작 부분 */
@@ -89,10 +92,14 @@ void loop()
 {
   /* 선택 옵션 넣은후 작동되게 case문 작성 */
   firstpage();
+  
  
 }
   /* -----------------------------*/
+  //시간 경과후 자동으로 화면 꺼지게 하기위한 함수 
+void timerIS(){// 가변저항 수치 이하면 작동하게 
 
+}
 // end loop문
 /* 함수 처리 공간 */
 // 반복문 처리해서 탈출조건 만들어서 탈출하는형태로 구현 
@@ -272,13 +279,20 @@ void bluemode()
         }while(true); //버튼을 누른다던지 이벤트 발생시 
         workingokcheck =0; 
 }
-void sleeping()
+void sleeping() // 60분이 지나면 자동으로 led가 종료되게 설정 
 {
+  timer0_millis=0; //외부 전역 변수 초기화 시간카운트위
+  lcd.clear();
   do { 
+    millisTime = millis();
+    int timev4 = (millisTime/58000)%10;//6초가 6000 -> 10초 10000 -> 1분 60000 (60초 -> 분)
+    lcd.setCursor(0,1);
+    lcd.println((String)timev4+" MIN LEFT                  ");
+   // lcd.noBacklight(); // 화면끄기 
     okbuttoncheck(); // 확인버튼 감지용 
    lcd.setCursor(0,0);
-    lcd.println("REST MODE(2300K)          ");
-  ledbright(); // 밝기 제어 부분 
+    lcd.println("Sleeping MODE         ");
+  //ledbright(); // 밝기 제어 부분 
         for(int i = 0 ; i <=59; i++){
          strip.setPixelColor(i, 255,115,23); //2300k 색상 
          //strip.setPixelColor(i, 255,139,39);//2700k 색상 
@@ -290,7 +304,8 @@ void sleeping()
         }
         
         }while(true); //버튼을 누른다던지 이벤트 발생시 
-        workingokcheck =0; 
+        workingokcheck =0;
+        
 }
 void djingmode()// 디제잉 모드 
 {
@@ -411,11 +426,19 @@ void firstpage(){ // 시작후 초기 실행및 구현 화면
   okbuttoncheck(); // 확인버튼 감지용 
    /* 메인 메뉴 셋팅 초기화면 구현 부 */ 
   if(powerbutcheck==!2){ //전원이 켜진 상태가 아닐때 
+    //MsTimer2::start(); // 화면 종료 타이머 시작 
     lcd.setCursor(0, 0);
-    lcd.println("LED BRIDGE V2   ");
+     millisTime=millis(); // 타이머 카운팅 시작 
+   int timev4 = (millisTime/10000)%10;//1000의 자리  
+    lcd.println("HI ING's LED BRD");
     lcd.setCursor(0, 1); 
     lcd.println("PLEASE POWER ON "); // 전원을 반드시 킨후 사용이 가능하도록 
     powera(); // 파워 전원 제어 부분 
+    if(select <=2) {
+      lcd.noBacklight();
+    }else if (select >=3 && select<=8){
+      lcd.backlight();
+    }
   }else{
      powera(); // 파워 전원 제어 부분 
   while(displaycount==0){
@@ -509,6 +532,7 @@ void powera()
   if (powerbutcheck == 1) // 전원이 켜짐
   {
      lcd.begin(); 
+     lcd.backlight();//화면꺼졌을때 키는용도 
         lcd.print("POWER ON");
         lcd.setCursor(0, 1);
         lcd.print("STAND POWER ON");
