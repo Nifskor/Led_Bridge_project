@@ -19,7 +19,6 @@ RGB LED Strip 을 이용하여 스탠드 등을 만들어 보는 프로젝트 �
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 #include <Adafruit_NeoPixel.h>
-//#include <MsTimer2.h> // 타이머 인터럽트 발생 함수 
 #ifdef __AVR__
 #include <avr/power.h>
 #endif
@@ -40,6 +39,7 @@ int displaycount =0; // 초기 디스플레이 표시 카운팅 체크
 int select2 =0;
 int menustep = 0 ; // 메뉴 선택부분 
 int workingokcheck = 0;
+int analogsoundsensor = A2;// 사운드 센서 
 unsigned long millisTime; // 전체 총 카운팅 업시간 
 extern volatile unsigned long timer0_millis ; // 타이머 변수 
 unsigned long timecount; // 현재 시간 카운팅  
@@ -84,6 +84,7 @@ void setup()
   }
   pinMode(powerbutton, INPUT);
   pinMode(okbutton,INPUT);
+  pinMode(analogsoundsensor,INPUT);
   lcd.clear();
 } // 셋업 부분 마지막
 
@@ -311,8 +312,8 @@ void sleeping() // 60분이 지나면 자동으로 led가 종료되게 설정
         strip.show();
         } 
         //-------------------------------------------시간 제어 
-        if(timev4 == 4){
-          lcd.noBacklight(); // 4분 경과후 lcd 끔 
+        if(timev4 == 3){
+          lcd.noBacklight(); // 3분 경과후 lcd 끔 
         }else if(timev4 ==56){
           lcd.backlight(); //종료 4분전에 다시 화면을 킴 
         }
@@ -334,9 +335,11 @@ void sleeping() // 60분이 지나면 자동으로 led가 종료되게 설정
         workingokcheck =0;
         timer0_millis=0; //외부 전역 변수 초기화 시간카운트위
 }
+//----------------------------------------------------- 디제잉 모드 
 void djingmode()// 디제잉 모드 
 {
   lcd.clear();
+  int val =0;
   do { 
    
     okbuttoncheck(); // 확인버튼 감지용 
@@ -345,25 +348,214 @@ void djingmode()// 디제잉 모드
   lcd.setCursor(0,1);
   lcd.println("AllloopEnd->OUT.");
   djingstart();
+  /*val = analogRead(analogsoundsensor);
+  Serial.println(val);
+  if(val <=29) {
+    strip.setPixelColor(10, 0,0,0); //red mode
+        strip.show();
+  }
+  if(val >=30){
+    strip.setPixelColor(10, 255,255,255); //red mode
+        strip.show();
+  }
+   analogWrite(PIN,val);*/
+  //------------------------------------------------------ 모드 디제잉 스타트 
   //colorWipe(strip.Color(255,   0,   0), 50); // Red
   //colorWipe(strip.Color(  0, 255,   0), 50); // Green
   colorWipe(strip.Color(  0,   0, 0), 50); // Dark
+  delay(10);
+  colorWipe(strip.Color(  255,   0, 0), 5); // Dark
+  colorWipe(strip.Color(  0,   0, 0), 4); // Dark
+  colorWipe(strip.Color(  0,   255, 0), 5); // Dark
+  colorWipe(strip.Color(  0,   0, 0), 4); // Dark
 delay(10000);
+//---------------------------------------------------------- 딜레이 스탑 아래부터 시작 
+// intro start 
+  colorWipe(strip.Color(  255,   0, 0), 25); // h
+  colorWipe(strip.Color(  0,   0, 0), 25); // Dark
+  delay(10);
+  colorWipe(strip.Color(  0,   255, 0), 25); // a
+  colorWipe(strip.Color(  0,   0, 0), 25); // Dark
+  delay(10);
+  colorWipe(strip.Color(  0,   0, 255), 20); // r
+  colorWipe(strip.Color(  0,   0, 0), 20); // Dark
+  delay(10);
+  colorWipe(strip.Color(  208, 60  , 208), 20); // d
+  colorWipe(strip.Color(  0,   0, 0), 20); // Dark
+  delay(10);
+  colorWipe(strip.Color(  73,  195, 142), 20); // w
+  colorWipe(strip.Color(  0,   0, 0), 20); // Dark
+  delay(10);
+  colorWipe(strip.Color(  98,   218, 186), 20); // e
+  colorWipe(strip.Color(  0,   0, 0), 20); // Dark
+  delay(10);
+  colorWipe(strip.Color(  218,   80, 168), 20); // l
+  colorWipe(strip.Color(  0,   0, 0), 20); // Dark
+  delay(10);
+  colorWipe(strip.Color(  206,  48, 218), 25); // l
+  colorWipe(strip.Color(  0,   0, 0), 23); // Dark
+delay(40);
+ colorWipe(strip.Color(  218,   80, 168), 20); // l
+  colorWipe(strip.Color(  0,   0, 0), 20); // Dark
+  delay(10);
+  colorWipe(strip.Color(  206,  48, 218), 25); // l
+  colorWipe(strip.Color(  0,   0, 0), 23); // Dark
+delay(40); 
+colorWipe(strip.Color(  218,   80, 168), 20); // l
+  colorWipe(strip.Color(  0,   0, 0), 20); // Dark
+  delay(10);
+  colorWipe(strip.Color(  206,  48, 218), 25); // l
+  colorWipe(strip.Color(  0,   0, 0), 23); // Dark
+delay(40); colorWipe(strip.Color(  218,   80, 168), 20); // l
+  colorWipe(strip.Color(  0,   0, 0), 20); // Dark
+  delay(10);
+  colorWipe(strip.Color(  206,  48, 218), 25); // l
+  colorWipe(strip.Color(  0,   0, 0), 23); // Dark
+delay(40); 
+colorWipe(strip.Color(  206,  48, 218), 25); // l
+  colorWipe(strip.Color(  0,   0, 0), 23); // Dark
+delay(40);  
+
+//--------------------------------------------------------
+do{
+colorWipe(strip.Color(  255,  255, 255), 1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 1); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255), 1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 1); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255),1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 1); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255), 1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 1); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255), 1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 1); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255), 1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 1); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255),1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 1); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255), 1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 1); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255), 1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 1); // Dark
+delay(40);colorWipe(strip.Color(  255,  255, 255), 1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255),1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255), 1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255), 1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40);
+  colorWipe(strip.Color(  0,   0, 0), 1); // Dark
+delay(40);colorWipe(strip.Color(  255,  255, 255), 1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255),1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255), 1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255), 1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40);  colorWipe(strip.Color(  0,   0, 0), 1); // Dark
+delay(40);colorWipe(strip.Color(  255,  255, 255), 1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255),1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255), 1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255), 1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40);
+  colorWipe(strip.Color(  0,   0, 0), 1); // Dark
+delay(40);colorWipe(strip.Color(  255,  255, 255), 1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255),1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255), 1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255), 1); // l
+  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255),1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255), 1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255), 1); // l  
+colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255),1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255), 1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  255, 255), 1); // l
   // This is middle parts 
-  theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
-  theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
-  theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
-  theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
-  theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
-  theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
-  theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
-  colorWipe(strip.Color(  0,   0, 0), 50); // Dark
-  //rainbow(8);             // Flowing rainbow cycle along the whole strip
+  theaterChase(strip.Color(255, 255, 255), 53); // White, half brightness
+theaterChase(strip.Color(255, 255, 255), 53); // White, half brightness
+theaterChase(strip.Color(255, 255, 255), 53); // White, half brightness
+theaterChase(strip.Color(255, 255, 255), 53); // White, half brightness
+theaterChase(strip.Color(255, 255, 255), 53); // White, half brightness
+theaterChase(strip.Color(255, 255, 255), 53); // White, half brightness
+theaterChase(strip.Color(255, 255, 255), 53); // White, half brightness
+  //-----------------------------------------------------------  번갈아 가면서 반짝반짝함 
+  //colorWipe(strip.Color(  0,   0, 0), 50); // Dark
+  rainbow(20);             // Flowing rainbow cycle along the whole strip
   //theaterChaseRainbow(50); // Rainbow-enhanced theaterChase variant
+  }while(true);// led 이벤트 
         if(okbuttontemp==1){
           workingokcheck++;
           if(workingokcheck >=2) break;
         }
+
         
         }while(true); //버튼을 누른다던지 이벤트 발생시 
         workingokcheck =0; 
@@ -586,9 +778,9 @@ void firstpage(){ // 시작후 초기 실행및 구현 화면
  displaycount=1;
   }
 // -------------------------------메뉴 화면 부분 
-if(timev4 ==1){//5분 경과후 자동으로 화면꺼짐 
+if(timev4 ==1){//1분 경과후 자동으로 화면꺼짐 
     lcd.noBacklight();
-  }if (select >=4){ // 로타리 4이상일경우 화면 켜짐 
+  } if(okbuttontemp ==1 ){ // 로타리 4이상일경우 화면 켜짐 (x) -> 로타리 지정값으로 할경우 먹지가 않아서 버튼 클릭으로 변경 대체 
     lcd.backlight();
   }
   //------------------------------------------
