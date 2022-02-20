@@ -38,8 +38,8 @@
 
 
 ### 4. 개발 언어 및 환경 
-> * ![Arduino](https://img.shields.io/badge/-Arduino-00979D?style=for-the-badge&logo=Arduino&logoColor=white) - NANO
-> * ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
+> * ![Arduino](https://img.shields.io/badge/-Arduino-00979D?style=for-the-badge&logo=Arduino&logoColor=white) - 아두이노 나노 사용 
+> * ![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white) - 아두이노 IDE 개발 환경 C 언어 사용 
 
 ### 5. 3D 프린터 출력 이미지 (제작 과정 진행중..) 
 <table>
