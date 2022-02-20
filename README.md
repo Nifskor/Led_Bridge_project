@@ -8,12 +8,12 @@
 > *  https://www.thingiverse.com/thing:1639224
 
 ### 2. 개발 기간 
-
+### :dizzy: 개발 진행 완료 2022 / 01 / 09 ~ 2022 / 2 / 20 일까지 수행 완료 ( 세부 버그 수정은 남아있음)
 > * 3D 프린터 출력 기간 : 2022 /01 / 09 ~ 2022 /01 /17 ( E 시리즈 6개부품 출력 및 조립 완료)
 > * 출력물 불량으로 S 부품 7개 다시 재출력 : 2022 / 01 / 29 ~ 2022/ 02 / 10
-> * 눈부심을 막아주는 쉐이더 출력기간 : 2022/ 02 / 13 ~ 진행중
-> * 아두이노를 이용한 개발 기간 : 2022/ 02 / 12 ~ 개발중 
-> * 전자 회로작업 (납땜, 회로기판 작업등) : 2022 / 02 / 11 ~ 진행중 ( 현재 기본 배선작업은완료 작동유무 확인완료)
+> * 눈부심을 막아주는 쉐이더 출력기간 : 2022/ 02 / 13 ~ 진행중 (프린터 고장으로 인해 출력 지연)
+> * 아두이노를 이용한 개발 기간 : 2022/ 02 / 12 ~ 2022 / 02 / 20 (디제잉 모드 빼고 완료) 
+> * 전자 회로작업 (납땜, 회로기판 작업등) : 2022 / 02 / 11 ~ 2022 / 02 / 19  작업완료 (약 3일정도 정밀 진행)
 
 ### 3. 기능 요구사항 (목표)
 > * 개발시 필수로 반드시 들어가야하는 조건 
@@ -38,8 +38,8 @@
 
 
 ### 4. 개발 언어 및 환경 
-> * ![Arduino](https://img.shields.io/badge/-Arduino-00979D?style=for-the-badge&logo=Arduino&logoColor=white) - NANO
-> * ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
+> * ![Arduino](https://img.shields.io/badge/-Arduino-00979D?style=for-the-badge&logo=Arduino&logoColor=white) - 아두이노 나노 사용 
+> * ![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white) - 아두이노 IDE 개발 환경 C 언어 사용 
 
 ### 5. 3D 프린터 출력 이미지 (제작 과정 진행중..) 
 <table>
