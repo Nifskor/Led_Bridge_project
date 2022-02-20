@@ -19,7 +19,7 @@ RGB LED Strip 을 이용하여 스탠드 등을 만들어 보는 프로젝트 �
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 #include <Adafruit_NeoPixel.h>
-#include <MsTimer2.h> // 타이머 인터럽트 발생 함수 
+//#include <MsTimer2.h> // 타이머 인터럽트 발생 함수 
 #ifdef __AVR__
 #include <avr/power.h>
 #endif
