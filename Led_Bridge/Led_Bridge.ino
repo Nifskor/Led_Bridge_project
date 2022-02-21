@@ -39,7 +39,7 @@ int displaycount =0; // 초기 디스플레이 표시 카운팅 체크
 int select2 =0;
 int menustep = 0 ; // 메뉴 선택부분 
 int workingokcheck = 0;
-int analogsoundsensor = A2;// 사운드 센서 
+int analogsoundsensor =A2;// 사운드 센서 
 unsigned long millisTime; // 전체 총 카운팅 업시간 
 extern volatile unsigned long timer0_millis ; // 타이머 변수 
 unsigned long timecount; // 현재 시간 카운팅  
@@ -338,8 +338,13 @@ void sleeping() // 60분이 지나면 자동으로 led가 종료되게 설정
 //----------------------------------------------------- 디제잉 모드 
 void djingmode()// 디제잉 모드 
 {
-  lcd.clear();
+   strip.begin();
+  strip.show();
+  strip.setBrightness(100); //초기밝기255 
   int val =0;
+  for(int i = 0 ; i<=59; i++){
+     strip.setPixelColor(i, 0,0,0);//2700k 
+  }
   do { 
    
     okbuttoncheck(); // 확인버튼 감지용 
@@ -347,22 +352,53 @@ void djingmode()// 디제잉 모드
     lcd.println("DJING MODE          ");
   lcd.setCursor(0,1);
   lcd.println("AllloopEnd->OUT.");
-  djingstart();
-  /*val = analogRead(analogsoundsensor);
+  //djingstart();
+  val = analogRead(analogsoundsensor);
   Serial.println(val);
-  if(val <=29) {
-    strip.setPixelColor(10, 0,0,0); //red mode
+  if(val <=60) {
+    strip.setPixelColor(25, 0,0,0);//2700k 
+     strip.setPixelColor(26, 0,0,0);//2700k 
+      strip.setPixelColor(27, 0,0,0);//2700k 
+       strip.setPixelColor(28, 0,0,0);//2700k 
+        strip.setPixelColor(29, 0,0,0);//2700k 
+         strip.setPixelColor(30, 0,0,0);//2700k 
+          strip.setPixelColor(31, 0,0,0);//2700k 
+           strip.setPixelColor(32, 0,0,0);//2700k 
+            strip.setPixelColor(33, 0,0,0);//2700k 
+             strip.setPixelColor(34, 0,0,0);//2700k 
+              strip.setPixelColor(35, 0,0,0);//2700k 
+               strip.setPixelColor(36, 0,0,0);//2700k 
+                strip.setPixelColor(37, 0,0,0);//2700k 
+                 strip.setPixelColor(38, 0,0,0);//2700k 
+                 strip.setPixelColor(39, 0,0,0);//2700k
         strip.show();
   }
-  if(val >=30){
-    strip.setPixelColor(10, 255,255,255); //red mode
+  if(val >=61){
+    strip.setPixelColor(10, 255,0,255); //red mode
+     strip.setPixelColor(25, 255,0,255);//2700k 
+     strip.setPixelColor(26, 255,255,0);//2700k 
+      strip.setPixelColor(27, 255,255,0);//2700k 
+       strip.setPixelColor(28, 255,255,0);//2700k 
+        strip.setPixelColor(29, 255,255,0);//2700k 
+         strip.setPixelColor(30, 255,255,0);//2700k 
+          strip.setPixelColor(31, 255,0,255);//2700k 
+           strip.setPixelColor(32, 255,255,0);//2700k 
+            strip.setPixelColor(33, 255,0,255);//2700k 
+             strip.setPixelColor(34, 255,0,255);//2700k 
+              strip.setPixelColor(35, 255,0,255);//2700k 
+               strip.setPixelColor(36, 255,0,255);//2700k 
+                strip.setPixelColor(37, 255,255,0);//2700k 
+                 strip.setPixelColor(38, 255,255,0);//2700k 
+                 strip.setPixelColor(39, 255,255,0);//2700k 
         strip.show();
   }
-   analogWrite(PIN,val);*/
+  if(val >= 70){
+     rainbow(9);  
+  }
   //------------------------------------------------------ 모드 디제잉 스타트 
   //colorWipe(strip.Color(255,   0,   0), 50); // Red
   //colorWipe(strip.Color(  0, 255,   0), 50); // Green
-  colorWipe(strip.Color(  0,   0, 0), 50); // Dark
+ /* colorWipe(strip.Color(  0,   0, 0), 50); // Dark
   delay(10);
   colorWipe(strip.Color(  255,   0, 0), 5); // Dark
   colorWipe(strip.Color(  0,   0, 0), 4); // Dark
@@ -550,7 +586,7 @@ theaterChase(strip.Color(255, 255, 255), 53); // White, half brightness
   //colorWipe(strip.Color(  0,   0, 0), 50); // Dark
   rainbow(20);             // Flowing rainbow cycle along the whole strip
   //theaterChaseRainbow(50); // Rainbow-enhanced theaterChase variant
-  }while(true);// led 이벤트 
+  }while(true);// led 이벤트 */
         if(okbuttontemp==1){
           workingokcheck++;
           if(workingokcheck >=2) break;
