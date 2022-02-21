@@ -2,15 +2,15 @@
 /*
 개발자 : ING's - (Nifskor)
 
-개발 기간 : 2022 / 01 / 27 ~ 진행중
+개발 기간 : 2022 / 01 / 27 ~ 2022 / 02 / 21 완전 개발 완료 
 출력물 파트 출처 : https://www.thingiverse.com/thing:1639224
 간단한 소개 : 본 프로젝트는 싱기버스에서 LED bridge Lamp  출력물 파츠를 이용해
 RGB LED Strip 을 이용하여 스탠드 등을 만들어 보는 프로젝트 이다.
 
 제작 이유 : 우리집 스탠드 등이 너무 오래되어서 사기엔 아깝고 나만의 스탠드를 만들어 보기위해
 
-필요한 기능 요구사항들 : 눈에 피로하지않은 독서 모드
-                   , 공부 모드  (집중모드) . 수리 모드 , 빨강, 초록, 파랑 모드 , 취침 모드
+필요한 기능 요구사항들 : 눈에 피로하지않은 휴식모드
+                   , 공부 모드  (집중모드) . 수리 모드 , 다재앙 모드, 초록, 파랑 모드 , 취침 모드
    - 취침 모드 : 눈에 피로하지않은 주광색 으로 표시되어지다가 일정 시간이 지나면 자동으로 종료되는 기능
 
 */
@@ -340,65 +340,24 @@ void djingmode()// 디제잉 모드
 {
    strip.begin();
   strip.show();
-  strip.setBrightness(100); //초기밝기255 
+  strip.setBrightness(185); //초기밝기255 
   int val =0;
   for(int i = 0 ; i<=59; i++){
      strip.setPixelColor(i, 0,0,0);//2700k 
   }
-  do { 
-   
-    okbuttoncheck(); // 확인버튼 감지용 
    lcd.setCursor(0,0);
     lcd.println("DJING MODE          ");
   lcd.setCursor(0,1);
   lcd.println("AllloopEnd->OUT.");
-  //djingstart();
+  djingstart();
+  okbuttoncheck(); // 확인버튼 감지용 
   val = analogRead(analogsoundsensor);
   Serial.println(val);
-  if(val <=60) {
-    strip.setPixelColor(25, 0,0,0);//2700k 
-     strip.setPixelColor(26, 0,0,0);//2700k 
-      strip.setPixelColor(27, 0,0,0);//2700k 
-       strip.setPixelColor(28, 0,0,0);//2700k 
-        strip.setPixelColor(29, 0,0,0);//2700k 
-         strip.setPixelColor(30, 0,0,0);//2700k 
-          strip.setPixelColor(31, 0,0,0);//2700k 
-           strip.setPixelColor(32, 0,0,0);//2700k 
-            strip.setPixelColor(33, 0,0,0);//2700k 
-             strip.setPixelColor(34, 0,0,0);//2700k 
-              strip.setPixelColor(35, 0,0,0);//2700k 
-               strip.setPixelColor(36, 0,0,0);//2700k 
-                strip.setPixelColor(37, 0,0,0);//2700k 
-                 strip.setPixelColor(38, 0,0,0);//2700k 
-                 strip.setPixelColor(39, 0,0,0);//2700k
-        strip.show();
-  }
-  if(val >=61){
-    strip.setPixelColor(10, 255,0,255); //red mode
-     strip.setPixelColor(25, 255,0,255);//2700k 
-     strip.setPixelColor(26, 255,255,0);//2700k 
-      strip.setPixelColor(27, 255,255,0);//2700k 
-       strip.setPixelColor(28, 255,255,0);//2700k 
-        strip.setPixelColor(29, 255,255,0);//2700k 
-         strip.setPixelColor(30, 255,255,0);//2700k 
-          strip.setPixelColor(31, 255,0,255);//2700k 
-           strip.setPixelColor(32, 255,255,0);//2700k 
-            strip.setPixelColor(33, 255,0,255);//2700k 
-             strip.setPixelColor(34, 255,0,255);//2700k 
-              strip.setPixelColor(35, 255,0,255);//2700k 
-               strip.setPixelColor(36, 255,0,255);//2700k 
-                strip.setPixelColor(37, 255,255,0);//2700k 
-                 strip.setPixelColor(38, 255,255,0);//2700k 
-                 strip.setPixelColor(39, 255,255,0);//2700k 
-        strip.show();
-  }
-  if(val >= 70){
-     rainbow(9);  
-  }
+ 
   //------------------------------------------------------ 모드 디제잉 스타트 
   //colorWipe(strip.Color(255,   0,   0), 50); // Red
   //colorWipe(strip.Color(  0, 255,   0), 50); // Green
- /* colorWipe(strip.Color(  0,   0, 0), 50); // Dark
+  colorWipe(strip.Color(  0,   0, 0), 50); // Dark
   delay(10);
   colorWipe(strip.Color(  255,   0, 0), 5); // Dark
   colorWipe(strip.Color(  0,   0, 0), 4); // Dark
@@ -453,93 +412,82 @@ colorWipe(strip.Color(  206,  48, 218), 25); // l
 delay(40);  
 
 //--------------------------------------------------------
-do{
-colorWipe(strip.Color(  255,  255, 255), 1); // l
+
+colorWipe(strip.Color(  255,  180, 255), 1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 1); // Dark
 delay(40);
-colorWipe(strip.Color(  255,  255, 255), 1); // l
+colorWipe(strip.Color(  255,  170, 255), 1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 1); // Dark
 delay(40);
-colorWipe(strip.Color(  255,  255, 255),1); // l
+colorWipe(strip.Color(  255,  160, 255),1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 1); // Dark
 delay(40);
-colorWipe(strip.Color(  255,  255, 255), 1); // l
+colorWipe(strip.Color(  255,  150, 255), 1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 1); // Dark
 delay(40);
-colorWipe(strip.Color(  255,  255, 255), 1); // l
+colorWipe(strip.Color(  255,  140, 255), 1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 1); // Dark
 delay(40);
-colorWipe(strip.Color(  255,  255, 255), 1); // l
+colorWipe(strip.Color(  255,  130, 255), 1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 1); // Dark
 delay(40);
-colorWipe(strip.Color(  255,  255, 255),1); // l
+colorWipe(strip.Color(  255,  120, 255),1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 1); // Dark
 delay(40);
-colorWipe(strip.Color(  255,  255, 255), 1); // l
+colorWipe(strip.Color(  255,  110, 255), 1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 1); // Dark
 delay(40);
-colorWipe(strip.Color(  255,  255, 255), 1); // l
+colorWipe(strip.Color(  255,  100, 255), 1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 1); // Dark
-delay(40);colorWipe(strip.Color(  255,  255, 255), 1); // l
+delay(40);
+  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40);
+colorWipe(strip.Color(  255,  90, 255),1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 2); // Dark
 delay(40);
-colorWipe(strip.Color(  255,  255, 255),1); // l
+colorWipe(strip.Color(  255,  80, 255), 1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 2); // Dark
 delay(40);
-colorWipe(strip.Color(  255,  255, 255), 1); // l
+colorWipe(strip.Color(  255,  70, 255), 1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 2); // Dark
 delay(40);
-colorWipe(strip.Color(  255,  255, 255), 1); // l
+colorWipe(strip.Color(  255,  60, 255),1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 2); // Dark
 delay(40);
-  colorWipe(strip.Color(  0,   0, 0), 1); // Dark
-delay(40);colorWipe(strip.Color(  255,  255, 255), 1); // l
+colorWipe(strip.Color(  255,  50, 255), 1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 2); // Dark
 delay(40);
-colorWipe(strip.Color(  255,  255, 255),1); // l
+colorWipe(strip.Color(  255,  40, 255), 1); // l
+delay(20);
+  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
+delay(40); 
+delay(40);colorWipe(strip.Color(  255,  30, 255), 1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 2); // Dark
 delay(40);
-colorWipe(strip.Color(  255,  255, 255), 1); // l
+colorWipe(strip.Color(  255,  20, 255),1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 2); // Dark
 delay(40);
-colorWipe(strip.Color(  255,  255, 255), 1); // l
-delay(20);
-  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
-delay(40);  colorWipe(strip.Color(  0,   0, 0), 1); // Dark
-delay(40);colorWipe(strip.Color(  255,  255, 255), 1); // l
+colorWipe(strip.Color(  255,  10, 255), 1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 2); // Dark
 delay(40);
-colorWipe(strip.Color(  255,  255, 255),1); // l
-delay(20);
-  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
-delay(40);
-colorWipe(strip.Color(  255,  255, 255), 1); // l
-delay(20);
-  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
-delay(40);
-colorWipe(strip.Color(  255,  255, 255), 1); // l
-delay(20);
-  colorWipe(strip.Color(  0,   0, 0), 2); // Dark
-delay(40);
-  colorWipe(strip.Color(  0,   0, 0), 1); // Dark
-delay(40);colorWipe(strip.Color(  255,  255, 255), 1); // l
+colorWipe(strip.Color(  255,  0, 255), 1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 2); // Dark
 delay(40);
@@ -547,29 +495,29 @@ colorWipe(strip.Color(  255,  255, 255),1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 2); // Dark
 delay(40);
-colorWipe(strip.Color(  255,  255, 255), 1); // l
+colorWipe(strip.Color(  255,  255, 200), 1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 2); // Dark
 delay(40);
-colorWipe(strip.Color(  255,  255, 255), 1); // l
+colorWipe(strip.Color(  255,  255, 180), 1); // l
   colorWipe(strip.Color(  0,   0, 0), 2); // Dark
 delay(40);
-colorWipe(strip.Color(  255,  255, 255),1); // l
+colorWipe(strip.Color(  255,  255, 170),1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 2); // Dark
 delay(40);
-colorWipe(strip.Color(  255,  255, 255), 1); // l
+colorWipe(strip.Color(  255,  255, 160), 1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 2); // Dark
 delay(40);
-colorWipe(strip.Color(  255,  255, 255), 1); // l  
+colorWipe(strip.Color(  255,  255, 150), 1); // l  
 colorWipe(strip.Color(  0,   0, 0), 2); // Dark
 delay(40);
-colorWipe(strip.Color(  255,  255, 255),1); // l
+colorWipe(strip.Color(  255,  255, 140),1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 2); // Dark
 delay(40);
-colorWipe(strip.Color(  255,  255, 255), 1); // l
+colorWipe(strip.Color(  255,  255, 13), 1); // l
 delay(20);
   colorWipe(strip.Color(  0,   0, 0), 2); // Dark
 delay(40);
@@ -584,16 +532,93 @@ theaterChase(strip.Color(255, 255, 255), 53); // White, half brightness
 theaterChase(strip.Color(255, 255, 255), 53); // White, half brightness
   //-----------------------------------------------------------  번갈아 가면서 반짝반짝함 
   //colorWipe(strip.Color(  0,   0, 0), 50); // Dark
-  rainbow(20);             // Flowing rainbow cycle along the whole strip
+  rainbow(3);             // Flowing rainbow cycle along the whole strip
   //theaterChaseRainbow(50); // Rainbow-enhanced theaterChase variant
-  }while(true);// led 이벤트 */
+do{
+  //----------------------------------------- 컨트롤러 확인용 상시등 
+  for(int i=26; i<=27; i++){
+     strip.setBrightness(85); //
+   strip.setPixelColor(i, 255,139,39);//2700k 색상 
+  }
+  //----------------------------------------- 
+    okbuttoncheck(); // 확인버튼 감지용 
+  val = analogRead(analogsoundsensor);
+  Serial.println(val); 
+   strip.setBrightness(150); //
+  if(val <=59) {
+     strip.setPixelColor(10, 0,0,0); //red mode 
+     strip.setPixelColor(11, 0,0,0); //red mode 
+     strip.setPixelColor(12, 0,0,0); //red mode 
+     strip.setPixelColor(13, 0,0,0); //red mode 
+     strip.setPixelColor(14, 0,0,0); //red mode 
+     strip.setPixelColor(15, 0,0,0); //red mode 
+     strip.setPixelColor(16, 0,0,0); //red mode
+     strip.setPixelColor(17, 0,0,0); //red mode 
+     strip.setPixelColor(18, 0,0,0); //red mode  
+     strip.setPixelColor(19, 0,0,0); //red mode 
+     strip.setPixelColor(20, 0,0,0); //red mode 
+     strip.setPixelColor(21, 0,0,0); //red mode 
+     strip.setPixelColor(22, 0,0,0); //red mode 
+     strip.setPixelColor(23, 0,0,0); //red mode 
+     strip.setPixelColor(24, 0,0,0); //red mode 
+     strip.setPixelColor(25, 0,0,0); //red mode
+       strip.setPixelColor(28, 0,0,0);//2700k 
+        strip.setPixelColor(29, 0,0,0);//2700k 
+         strip.setPixelColor(30, 0,0,0);//2700k 
+          strip.setPixelColor(31, 0,0,0);//2700k 
+           strip.setPixelColor(32, 0,0,0);//2700k 
+            strip.setPixelColor(33, 0,0,0);//2700k 
+             strip.setPixelColor(34, 0,0,0);//2700k 
+              strip.setPixelColor(35, 0,0,0);//2700k 
+               strip.setPixelColor(36, 0,0,0);//2700k 
+                strip.setPixelColor(37, 0,0,0);//2700k 
+                 strip.setPixelColor(38, 0,0,0);//2700k 
+                 strip.setPixelColor(39, 0,0,0);//2700k
+        strip.show();
+  }
+  if(val >=60){
+    strip.setPixelColor(10, 255,255,0); //red mode  
+     strip.setPixelColor(11, 0,255,0); //red mode 
+     strip.setPixelColor(12, 0,255,0); //red mode 
+     strip.setPixelColor(13, 255,255,0); //red mode 
+     strip.setPixelColor(14, 255,255,0); //red mode 
+     strip.setPixelColor(15, 255,255,0); //red mode 
+     strip.setPixelColor(16, 255,255,180); //red mode
+     strip.setPixelColor(17, 150,255,180); //red mode 
+     strip.setPixelColor(18, 255,255,0); //red mode  
+     strip.setPixelColor(19, 255,255,0); //red mode 
+     strip.setPixelColor(20, 255,255,0); //red mode 
+     strip.setPixelColor(21, 255,255,0); //red mode 
+     strip.setPixelColor(22, 255,255,0); //red mode 
+     strip.setPixelColor(23, 150,255,0); //red mode 
+     strip.setPixelColor(24, 0,255,0); //red mode 
+     strip.setPixelColor(25, 150,255,180); //red mode
+       strip.setPixelColor(28, 255,255,0);//2700k 
+        strip.setPixelColor(29, 255,255,0);//2700k 
+         strip.setPixelColor(30, 255,255,0);//2700k 
+          strip.setPixelColor(31, 255,0,180);//2700k 
+           strip.setPixelColor(32, 255,255,0);//2700k 
+            strip.setPixelColor(33, 255,0,180);//2700k 
+             strip.setPixelColor(34, 255,0,180);//2700k 
+              strip.setPixelColor(35, 255,0,180);//2700k 
+               strip.setPixelColor(36, 255,0,180);//2700k 
+                strip.setPixelColor(37, 255,255,0);//2700k 
+                 strip.setPixelColor(38, 255,255,0);//2700k 
+                 strip.setPixelColor(39, 255,255,0);//2700k 
+        strip.show();
+  }
+  if(val >= 65){
+     rainbow(1);  
+  } 
+  if(val >= 66){
+    theaterChase(strip.Color(255, 255, 255), 53); // White, half brightness
+  }
+ //----------------------------------------------------------------------------- 디제잉 마지막 부분 
         if(okbuttontemp==1){
           workingokcheck++;
           if(workingokcheck >=2) break;
         }
-
-        
-        }while(true); //버튼을 누른다던지 이벤트 발생시 
+        }while(true);// led 이벤트 
         workingokcheck =0; 
   timer0_millis=0; //외부 전역 변수 초기화 시간카운트위
 }
@@ -738,6 +763,10 @@ void theaterChase(uint32_t color, int wait) {
       delay(wait);  // Pause for a moment
     }
   }
+   for(int i = 0 ; i<=59; i++){
+       strip.setPixelColor(i, 0, 0, 0);
+      strip.show();
+    } 
 }
 void rainbow(int wait) {
   // Hue of first pixel runs 5 complete loops through the color wheel.
@@ -755,7 +784,12 @@ void rainbow(int wait) {
     // strip.rainbow(firstPixelHue, 1, 255, 255, true);
     strip.show(); // Update strip with new contents
     delay(wait);  // Pause for a moment
+    
   }
+  for(int i = 0 ; i<=59; i++){
+       strip.setPixelColor(i, 0, 0, 0);
+      strip.show();
+    }
 }
 void theaterChaseRainbow(int wait) {
   int firstPixelHue = 0;     // First pixel starts at red (hue 0)
