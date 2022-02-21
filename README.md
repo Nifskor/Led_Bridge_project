@@ -58,7 +58,7 @@
 <img src = "https://user-images.githubusercontent.com/92977647/151407579-443d4673-a5aa-4c58-9bc1-738e3418344e.png" width="480" height="264"/>
 출처 : https://www.thingiverse.com/thing:1639224
 
-### 7. 저작권 라이센스 
+### 7. 저작권 라이센스 (License)
 > *Copyright @2022 ING's TEC (Nifskor) and MIT license
 
 > *개인적 용도는 괜찮지만 상업적 용도는 허용하지 않습니다
