@@ -59,6 +59,6 @@
 출처 : https://www.thingiverse.com/thing:1639224
 
 ### 7. 저작권 라이센스 (License)
-> *Copyright @2022 ING's TEC (Nifskor) and MIT license
+>* Copyright @2022 ING's TEC (Nifskor) and MIT license
 
-> *개인적 용도는 괜찮지만 상업적 용도는 허용하지 않습니다
+>* 개인적 용도는 괜찮지만 상업적 용도는 허용하지 않습니다 - 문의 : (nifskr@naver.com)
