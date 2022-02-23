@@ -59,6 +59,7 @@
 출처 : https://www.thingiverse.com/thing:1639224
 
 ### 7. 저작권 라이센스 (License)
->* Copyright @2022 ING's TEC (Nifskor) and MIT license
+>* Copyright @2022 ING's TEC (Nifskor) and Creative Commons ![스크린샷 2022-02-23 21 10 25](https://user-images.githubusercontent.com/92977647/155316914-dff67ba7-9236-44d7-8d93-66aae4ec8d77.png)
+
 
 >* 개인적 용도는 괜찮지만 상업적 용도는 허용하지 않습니다 - 문의 : (nifskr@naver.com)
