@@ -536,7 +536,7 @@ theaterChase(strip.Color(255, 255, 255), 53); // White, half brightness
   //theaterChaseRainbow(50); // Rainbow-enhanced theaterChase variant
 do{
   //----------------------------------------- 컨트롤러 확인용 상시등 
-  for(int i=26; i<=27; i++){
+  for(int i=24; i<=25; i++){
      strip.setBrightness(85); //
    strip.setPixelColor(i, 255,139,39);//2700k 색상 
   }
@@ -545,7 +545,7 @@ do{
   val = analogRead(analogsoundsensor);
   Serial.println(val); 
    strip.setBrightness(150); //
-  if(val <=59) {
+  if(val <=66) {// 수치 변경 금지 
      strip.setPixelColor(10, 0,0,0); //red mode 
      strip.setPixelColor(11, 0,0,0); //red mode 
      strip.setPixelColor(12, 0,0,0); //red mode 
@@ -560,8 +560,8 @@ do{
      strip.setPixelColor(21, 0,0,0); //red mode 
      strip.setPixelColor(22, 0,0,0); //red mode 
      strip.setPixelColor(23, 0,0,0); //red mode 
-     strip.setPixelColor(24, 0,0,0); //red mode 
-     strip.setPixelColor(25, 0,0,0); //red mode
+     strip.setPixelColor(26, 0,0,0); //red mode 
+     strip.setPixelColor(27, 0,0,0); //red mode
        strip.setPixelColor(28, 0,0,0);//2700k 
         strip.setPixelColor(29, 0,0,0);//2700k 
          strip.setPixelColor(30, 0,0,0);//2700k 
@@ -576,7 +576,7 @@ do{
                  strip.setPixelColor(39, 0,0,0);//2700k
         strip.show();
   }
-  if(val >=60){
+  if(val >=67){// 수치 변경 금지 
     strip.setPixelColor(10, 255,255,0); //red mode  
      strip.setPixelColor(11, 0,255,0); //red mode 
      strip.setPixelColor(12, 0,255,0); //red mode 
@@ -591,8 +591,8 @@ do{
      strip.setPixelColor(21, 255,255,0); //red mode 
      strip.setPixelColor(22, 255,255,0); //red mode 
      strip.setPixelColor(23, 150,255,0); //red mode 
-     strip.setPixelColor(24, 0,255,0); //red mode 
-     strip.setPixelColor(25, 150,255,180); //red mode
+     strip.setPixelColor(26, 0,255,0); //red mode 
+     strip.setPixelColor(27, 150,255,180); //red mode
        strip.setPixelColor(28, 255,255,0);//2700k 
         strip.setPixelColor(29, 255,255,0);//2700k 
          strip.setPixelColor(30, 255,255,0);//2700k 
@@ -607,10 +607,10 @@ do{
                  strip.setPixelColor(39, 255,255,0);//2700k 
         strip.show();
   }
-  if(val >= 65){
+  if(val >= 80){// 휴대폰 : 80 ~ 81 수치가 적당 , 스피커 경우  볼륨에 따라 다름 : 73 ~ 75 , 이어폰 : 75 (가끔) / 80 (적정수치 판단) 을 잘 못넘김 
      rainbow(1);  
   } 
-  if(val >= 66){
+  if(val >= 81){
     theaterChase(strip.Color(255, 255, 255), 53); // White, half brightness
   }
  //----------------------------------------------------------------------------- 디제잉 마지막 부분 
