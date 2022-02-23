@@ -545,7 +545,7 @@ do{
   val = analogRead(analogsoundsensor);
   Serial.println(val); 
    strip.setBrightness(150); //
-  if(val <=66) {// 수치 변경 금지 
+  if(val <=59) {// 수치 변경 금지 
      strip.setPixelColor(10, 0,0,0); //red mode 
      strip.setPixelColor(11, 0,0,0); //red mode 
      strip.setPixelColor(12, 0,0,0); //red mode 
@@ -576,7 +576,7 @@ do{
                  strip.setPixelColor(39, 0,0,0);//2700k
         strip.show();
   }
-  if(val >=67){// 수치 변경 금지 
+  if(val >=60){// 수치 변경 금지 
     strip.setPixelColor(10, 255,255,0); //red mode  
      strip.setPixelColor(11, 0,255,0); //red mode 
      strip.setPixelColor(12, 0,255,0); //red mode 
@@ -607,10 +607,10 @@ do{
                  strip.setPixelColor(39, 255,255,0);//2700k 
         strip.show();
   }
-  if(val >= 80){// 휴대폰 : 80 ~ 81 수치가 적당 , 스피커 경우  볼륨에 따라 다름 : 73 ~ 75 , 이어폰 : 75 (가끔) / 80 (적정수치 판단) 을 잘 못넘김 
+  if(val >= 68){// 휴대폰 : 80 ~ 81 수치가 적당 , 스피커 경우  볼륨에 따라 다름 : 73 ~ 75 , 이어폰 : 58 / 60 (적정수치 판단) 을 잘 못넘김 (센싱에 따라 다름 )
      rainbow(1);  
   } 
-  if(val >= 81){
+  if(val >= 70){
     theaterChase(strip.Color(255, 255, 255), 53); // White, half brightness
   }
  //----------------------------------------------------------------------------- 디제잉 마지막 부분 
