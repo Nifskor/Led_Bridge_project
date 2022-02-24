@@ -111,7 +111,6 @@ void restmode()
   ledbright(); // 밝기 제어 부분 
         for(int i = 0 ; i <=59; i++){
          strip.setPixelColor(i, 255,115,23); //2300k 색상 
-         //strip.setPixelColor(i, 255,139,39);//2700k 색상 
         strip.show();
         } 
         if(okbuttontemp==1){
@@ -624,11 +623,12 @@ do{
 }
 void middlemode(){
   lcd.clear();
-  for(int k = 0 ; k <=59; k++){
+ 
+  do { 
+    for(int k = 0 ; k <=59; k++){ // left 작동 버그 오류 수정 2022 02 24
          strip.setPixelColor(k, 0,0,0); //red mode
         strip.show();
         }
-  do { 
     //---------------------------------
     okbuttoncheck(); // 확인버튼 감지용 
     int val = analogRead(resis) / 256; // 나누기 256로 max값 4로 나오게 4 가지 옵션 
