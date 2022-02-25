@@ -62,9 +62,14 @@
 <img src = "https://user-images.githubusercontent.com/92977647/151407579-443d4673-a5aa-4c58-9bc1-738e3418344e.png" width="480" height="264"/>
 출처 : https://www.thingiverse.com/thing:1639224
 
-
-
-
+### 6-1. 완성후 결과물 
+> * 제작과정 및 좀더 자세한 이야기는 네이버블로그에서 확인하실수 있습니다 
+<table>
+  <tr>
+<td> <img alt="" src = "https://user-images.githubusercontent.com/92977647/155687701-97f2cec2-3657-4ea9-8fb6-6f208c5ed3ad.gif" width="480" height="264/"/></td>
+   <td> <img alt="" src = "https://user-images.githubusercontent.com/92977647/155687741-4364abba-8756-4bab-9045-87abcbefecc3.gif" width="480" height="264/"/></td>
+    </table>
+    
 ### 7. 저작권 라이센스 (License)
 > * Led Bridge parts Stl 설계 파일은 원저작자 : <b>Janis Jakaitis </b>님에게 있습니다.
 > * 아두이노 프로그래밍 및 회로 기판 관련 라이선스 :
