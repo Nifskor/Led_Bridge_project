@@ -1,5 +1,8 @@
 # <div align=center> Led_Bridge_project </div>
-#### <div align=center> 본 프로젝트는 개인 토이 프로젝트로 싱기버스에서 Led bridge Lamp 출력물 파츠를 이용해 <br>RGB LED Strip 을 이용하여 스탠드등을 만들어보는 프로젝트입니다. </div></br>
+#### <div align=center> 본 프로젝트는 개인 토이 프로젝트로 싱기버스에서 Led bridge Lamp 출력물 파츠를 이용해 <br>RGB LED Strip 을 이용하여 스탠드등을 만들어보는 프로젝트입니다. </div></br>                                              
+
+* 제작 과정및 상세내용은 네이버 블로그에서 확인 하실수있습니다!
+ <a href="https://blog.naver.com/nifskr/222656021598"> <img src="https://user-images.githubusercontent.com/92977647/151411167-b7a060a3-2830-4e4a-abaa-7b8e7bdc2a64.png" ></a>
 ***
 ### 제작 이유 
 > * 우리집에 있는 스탠드 등이 너무 오래되어서  사기엔 아깝고 나만의 스탠드 등을 만들어보기 위해서 
@@ -39,8 +42,9 @@
 
 ### 3-1. 기능 요구사항 테스트 결과 
 ### 기능 구현율 100% 완료 
+![스크린샷 2022-02-25 17 44 25](https://user-images.githubusercontent.com/92977647/155683797-0e31044b-ae6e-47e6-8ad0-aa758f999d8d.png)
 
-
+![스크린샷 2022-02-25 17 45 02](https://user-images.githubusercontent.com/92977647/155683891-5e6424ae-cc5b-4943-ac6f-5bdc5c302c57.png)
 
 ### 4. 개발 언어 및 환경 
 > * ![Arduino](https://img.shields.io/badge/-Arduino-00979D?style=for-the-badge&logo=Arduino&logoColor=white) - 아두이노 나노 사용 
@@ -52,11 +56,14 @@
 <td> <img alt="" src = "https://user-images.githubusercontent.com/92977647/151405882-868e048f-3da1-43c8-b910-628e1545a484.gif" width="480" height="264/"/></td>
 
 <td> <img alt="" src="https://user-images.githubusercontent.com/92977647/151407074-f02b3c15-74e0-4a43-86bf-eca1ac3caa72.png" width="480"></td>
-    </table>
+   </table>
 
-### 6. 완성후 예상 결과물 (예상도)
+### 6. 완성후 예상 결과물 
 <img src = "https://user-images.githubusercontent.com/92977647/151407579-443d4673-a5aa-4c58-9bc1-738e3418344e.png" width="480" height="264"/>
 출처 : https://www.thingiverse.com/thing:1639224
+
+
+
 
 ### 7. 저작권 라이센스 (License)
 > * Led Bridge parts Stl 설계 파일은 원저작자 : <b>Janis Jakaitis </b>님에게 있습니다.
