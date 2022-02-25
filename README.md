@@ -71,7 +71,11 @@
    <td> <img alt="" src = "https://user-images.githubusercontent.com/92977647/155687741-4364abba-8756-4bab-9045-87abcbefecc3.gif" width="480" height="264/"/></td>
     </table>
     
-### 7. 저작권 라이센스 (License)
+### 7. 추후 추진 계획 
+> * Led_Bridge와 컴퓨터 (Mac)이랑 연동가능한 프로그램을 개발하여 컴퓨터에서도 전등을 제어할수있게 만들기 
+> * PIR센서를 이용해 자리에 착석하면 자동으로 전등이 켜지도록 기능 구현해보기 
+
+### 7-1. 저작권 라이센스 (License)
 > * Led Bridge parts Stl 설계 파일은 원저작자 : <b>Janis Jakaitis </b>님에게 있습니다.
 > * 아두이노 프로그래밍 및 회로 기판 관련 라이선스 :
 
