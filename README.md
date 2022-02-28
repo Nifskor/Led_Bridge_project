@@ -51,6 +51,9 @@
 > * ![Arduino](https://img.shields.io/badge/-Arduino-00979D?style=for-the-badge&logo=Arduino&logoColor=white) - 아두이노 나노 사용 
 > * ![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white) - 아두이노 IDE 개발 환경 C 언어 사용 
 
+### 4-1. 회로도 
+<img src = "https://user-images.githubusercontent.com/92977647/156000794-a0b0d721-42a9-40f5-8a3a-fba1baf2c9ef.png" width="480" height="264"/>
+
 ### 5. 3D 프린터 출력 이미지 (제작 과정 진행중..) 
 <table>
   <tr>
